@@ -1,0 +1,17 @@
+node_modules
+*.log
+.expo
+dist
+build
+
+# Native Android build output — big, regenerated via `expo prebuild` + gradle, not source
+apps/*/android
+
+# Backend has its own separate git repo/deploy (github.com/anieruth007/gvr-mart-backend)
+backend/
+
+# Local infra scratch, not part of the app source
+pgsql-runtime/
+tools/
+.pw/
+docker-compose.yml
