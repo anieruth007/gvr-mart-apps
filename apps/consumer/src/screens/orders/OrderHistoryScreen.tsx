@@ -30,7 +30,7 @@ export function OrderHistoryScreen({ navigation }: any) {
       <Text style={[typography.h1, { marginBottom: 18 }]}>My Orders</Text>
 
       {orders.length === 0 ? (
-        <EmptyState icon="📦" message="You haven't placed any orders yet." />
+        <EmptyState icon="cube-outline" message="You haven't placed any orders yet." />
       ) : (
         orders.map((order) => (
           <View key={order.id} style={styles.card}>

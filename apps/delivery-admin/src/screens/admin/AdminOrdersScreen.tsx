@@ -36,7 +36,7 @@ export function AdminOrdersScreen({ navigation }: any) {
 
       <View style={styles.body}>
         {orders.length === 0 ? (
-          <EmptyState icon="📦" message="No orders match this filter." />
+          <EmptyState icon="cube-outline" message="No orders match this filter." />
         ) : (
           orders.map((order) => (
             <TouchableOpacity key={order.id} style={styles.card} onPress={() => navigation.navigate('AdminOrderDetail', { orderId: order.id })}>

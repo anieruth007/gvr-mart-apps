@@ -43,7 +43,7 @@ export function DeliveryHistoryScreen() {
 
       <Text style={styles.sectionLabel}>Completed Deliveries</Text>
       {history.length === 0 ? (
-        <EmptyState icon="🏁" message="No completed deliveries yet." />
+        <EmptyState icon="checkmark-done-outline" message="No completed deliveries yet." />
       ) : (
         history.map((h) => (
           <View key={h.id} style={styles.row}>

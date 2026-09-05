@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { Ionicons } from '@expo/vector-icons';
 import type { CategoryDto, ProductDto } from '@gvr-mart/shared-types';
 import { colors, gradients, radii, shadow, typography, fontFamily } from '@gvr-mart/theme';
 import { api } from '../../api/client';
@@ -10,14 +11,7 @@ import { CategoryChip } from '../../components/CategoryChip';
 import { ProductCard } from '../../components/ProductCard';
 import { BannerCarousel } from '../../components/BannerCarousel';
 import { useCart } from '../../context/CartContext';
-
-const CATEGORY_ICONS: Record<string, string> = {
-  Fruits: '🍎',
-  Vegetables: '🥦',
-  'Leafy Greens': '🥬',
-  Exotic: '🥝',
-  'Dry Fruits': '🥜',
-};
+import { ALL_CATEGORY_PHOTO, CATEGORY_PHOTOS } from '../../constants/categoryPhotos';
 
 function discountPct(p: ProductDto) {
   const v = p.variants[0];
@@ -80,10 +74,16 @@ export function HomeScreen({ navigation }: any) {
   return (
     <ScreenContainer padded={false} refreshing={refreshing} onRefresh={onRefresh}>
       <View style={styles.utilityBar}>
-        <Text style={styles.utilityText}>
-          📍 Deliver to: <Text style={styles.utilityBold}>Chennai, TN</Text>
-        </Text>
-        <Text style={styles.utilityText}>⚡ 30-min delivery</Text>
+        <View style={styles.utilityItem}>
+          <Ionicons name="location-outline" size={13} color={colors.blueSoft} />
+          <Text style={styles.utilityText}>
+            Deliver to: <Text style={styles.utilityBold}>Chennai, TN</Text>
+          </Text>
+        </View>
+        <View style={styles.utilityItem}>
+          <Ionicons name="flash-outline" size={13} color={colors.blueSoft} />
+          <Text style={styles.utilityText}>30-min delivery</Text>
+        </View>
       </View>
 
       <View style={styles.body}>
@@ -102,7 +102,7 @@ export function HomeScreen({ navigation }: any) {
                 <Text style={styles.heroCtaText}>Start Shopping →</Text>
               </TouchableOpacity>
               <View style={styles.heroStat}>
-                <Text style={styles.heroStars}>★★★★★</Text>
+                <Ionicons name="star" size={12} color={colors.mango} />
                 <Text style={styles.heroStatText}>4.9 · 12k+ orders</Text>
               </View>
             </LinearGradient>,
@@ -131,7 +131,7 @@ export function HomeScreen({ navigation }: any) {
             {categories.map((c) => (
               <CategoryChip
                 key={c.id}
-                emoji={c.emoji ?? CATEGORY_ICONS[c.name] ?? '🧺'}
+                imageUrl={c.imageUrl ?? CATEGORY_PHOTOS[c.name] ?? ALL_CATEGORY_PHOTO}
                 label={c.name}
                 onPress={() => navigation.navigate('Categories', { categoryId: c.id })}
               />
@@ -168,7 +168,7 @@ export function HomeScreen({ navigation }: any) {
           {WHY_US.map((item) => (
             <View key={item.title} style={styles.whyItem}>
               <View style={styles.whyIcon}>
-                <Text style={{ fontSize: 17 }}>{item.icon}</Text>
+                <Ionicons name={item.icon} size={16} color={colors.white} />
               </View>
               <View style={{ flex: 1 }}>
                 <Text style={styles.whyTitle}>{item.title}</Text>
@@ -182,11 +182,11 @@ export function HomeScreen({ navigation }: any) {
   );
 }
 
-const WHY_US = [
-  { icon: '🌱', title: 'Farm Fresh', body: 'Sourced daily from local farms' },
-  { icon: '🚚', title: 'Fast Delivery', body: 'At your door in 30 minutes' },
-  { icon: '↩️', title: 'Easy Returns', body: 'Not fresh? Free replacement' },
-  { icon: '🔒', title: 'Secure Payment', body: 'UPI, cards & cash on delivery' },
+const WHY_US: { icon: React.ComponentProps<typeof Ionicons>['name']; title: string; body: string }[] = [
+  { icon: 'leaf-outline', title: 'Farm Fresh', body: 'Sourced daily from local farms' },
+  { icon: 'bicycle-outline', title: 'Fast Delivery', body: 'At your door in 30 minutes' },
+  { icon: 'refresh-outline', title: 'Easy Returns', body: 'Not fresh? Free replacement' },
+  { icon: 'shield-checkmark-outline', title: 'Secure Payment', body: 'UPI, cards & cash on delivery' },
 ];
 
 const styles = StyleSheet.create({
@@ -197,6 +197,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
+  utilityItem: { flexDirection: 'row', alignItems: 'center', gap: 5 },
   utilityText: { color: colors.blueSoft, fontSize: 11.5, fontFamily: fontFamily.body },
   utilityBold: { color: colors.mango, fontFamily: fontFamily.bodyBold },
   body: { padding: 18, paddingTop: 16 },
@@ -230,7 +231,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 8,
   },
-  heroStars: { color: colors.mango, fontSize: 12 },
   heroStatText: { color: colors.blueDeep, fontSize: 11.5, fontFamily: fontFamily.bodyBold },
   promoBanner: { flex: 1, borderRadius: radii.lg, padding: 22, justifyContent: 'center' },
   promoTag: {

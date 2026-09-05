@@ -1,19 +1,19 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { colors, radii, shadow, fontFamily } from '@gvr-mart/theme';
 
 interface Props {
-  emoji: string;
+  imageUrl: string;
   label: string;
   active?: boolean;
   onPress: () => void;
 }
 
-export function CategoryChip({ emoji, label, active, onPress }: Props) {
+export function CategoryChip({ imageUrl, label, active, onPress }: Props) {
   return (
     <TouchableOpacity style={styles.wrap} onPress={onPress} activeOpacity={0.8}>
       <View style={[styles.icon, active && styles.iconActive]}>
-        <Text style={styles.emoji}>{emoji}</Text>
+        <Image source={{ uri: imageUrl }} style={styles.photo} resizeMode="cover" />
       </View>
       <Text style={[styles.label, active && styles.labelActive]} numberOfLines={1}>
         {label}
@@ -33,10 +33,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderWidth: 2,
     borderColor: 'transparent',
+    overflow: 'hidden',
     ...shadow.card,
   },
   iconActive: { borderColor: colors.blue, backgroundColor: colors.blueSoft },
-  emoji: { fontSize: 28 },
+  photo: { width: '100%', height: '100%' },
   label: { fontSize: 11.5, fontFamily: fontFamily.bodyBold, color: colors.inkSoft, textAlign: 'center' },
   labelActive: { color: colors.blueDeep },
 });

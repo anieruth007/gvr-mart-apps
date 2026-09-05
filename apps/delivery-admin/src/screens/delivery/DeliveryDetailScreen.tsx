@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Linking, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { colors, radii, shadow, typography, fontFamily } from '@gvr-mart/theme';
 import { api, ApiError } from '../../api/client';
 import { ScreenContainer } from '../../components/ScreenContainer';
@@ -64,7 +65,8 @@ export function DeliveryDetailScreen({ route, navigation }: any) {
         <Text style={styles.value}>{order.address.line1}{order.address.line2 ? `, ${order.address.line2}` : ''}</Text>
         <Text style={styles.value}>{order.address.city}, {order.address.state} - {order.address.pincode}</Text>
         <TouchableOpacity onPress={() => Linking.openURL(`tel:${order.user.phone}`)} style={styles.callBtn}>
-          <Text style={styles.callBtnText}>📞 Call Customer</Text>
+          <Ionicons name="call-outline" size={14} color={colors.blueDeep} />
+          <Text style={styles.callBtnText}>Call Customer</Text>
         </TouchableOpacity>
       </View>
 
@@ -115,7 +117,7 @@ const styles = StyleSheet.create({
   card: { backgroundColor: colors.white, borderRadius: radii.md, padding: 16, marginBottom: 16, ...shadow.card },
   sectionLabel: { fontSize: 11.5, fontFamily: fontFamily.bodyExtraBold, color: colors.inkSoft, marginBottom: 8, textTransform: 'uppercase', letterSpacing: 0.5 },
   value: { fontFamily: fontFamily.body, fontSize: 13, color: colors.ink, marginBottom: 2 },
-  callBtn: { marginTop: 12, alignSelf: 'flex-start', backgroundColor: colors.blueSoft, borderRadius: 10, paddingHorizontal: 14, paddingVertical: 8 },
+  callBtn: { flexDirection: 'row', alignItems: 'center', gap: 6, marginTop: 12, alignSelf: 'flex-start', backgroundColor: colors.blueSoft, borderRadius: 10, paddingHorizontal: 14, paddingVertical: 8 },
   callBtnText: { fontFamily: fontFamily.bodyBold, fontSize: 12.5, color: colors.blueDeep },
   divider: { height: 1, backgroundColor: colors.border, marginVertical: 10 },
   rowBetween: { flexDirection: 'row', justifyContent: 'space-between' },

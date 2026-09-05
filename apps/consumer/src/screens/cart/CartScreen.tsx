@@ -14,7 +14,7 @@ export function CartScreen({ navigation }: any) {
     return (
       <ScreenContainer>
         <Text style={[typography.h1, { marginBottom: 4 }]}>Your Cart</Text>
-        <EmptyState icon="🛒" message="Your cart is empty. Add some farm-fresh picks!" />
+        <EmptyState icon="cart-outline" message="Your cart is empty. Add some farm-fresh picks!" />
       </ScreenContainer>
     );
   }

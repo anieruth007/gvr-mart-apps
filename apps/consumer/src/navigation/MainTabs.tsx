@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { colors, fontFamily } from '@gvr-mart/theme';
 import { HomeScreen } from '../screens/home/HomeScreen';
@@ -11,11 +11,12 @@ import type { MainTabParamList } from './types';
 
 const Tab = createBottomTabNavigator<MainTabParamList>();
 
-const ICONS: Record<keyof MainTabParamList, string> = {
-  Home: '🏠',
-  Categories: '📋',
-  Cart: '🛒',
-  Account: '👤',
+type IconName = React.ComponentProps<typeof Ionicons>['name'];
+const ICONS: Record<keyof MainTabParamList, { outline: IconName; filled: IconName }> = {
+  Home: { outline: 'home-outline', filled: 'home' },
+  Categories: { outline: 'grid-outline', filled: 'grid' },
+  Cart: { outline: 'cart-outline', filled: 'cart' },
+  Account: { outline: 'person-outline', filled: 'person' },
 };
 
 export function MainTabs() {
@@ -29,7 +30,10 @@ export function MainTabs() {
         tabBarInactiveTintColor: '#ABB2A2',
         tabBarStyle: { borderTopColor: colors.border, height: 62, paddingTop: 6, paddingBottom: 8 },
         tabBarLabelStyle: { fontFamily: fontFamily.bodyBold, fontSize: 10.5 },
-        tabBarIcon: () => <Text style={{ fontSize: 19 }}>{ICONS[route.name as keyof MainTabParamList]}</Text>,
+        tabBarIcon: ({ focused, color }) => {
+          const icon = ICONS[route.name as keyof MainTabParamList];
+          return <Ionicons name={focused ? icon.filled : icon.outline} size={21} color={color} />;
+        },
         tabBarBadge: route.name === 'Cart' && cart && cart.itemCount > 0 ? cart.itemCount : undefined,
         tabBarBadgeStyle: { backgroundColor: colors.tomato, fontSize: 9.5 },
       })}

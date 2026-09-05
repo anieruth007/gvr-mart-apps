@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { Alert, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import * as ImagePicker from 'expo-image-picker';
+import { Ionicons } from '@expo/vector-icons';
 import type { CategoryDto, ProductDto } from '@gvr-mart/shared-types';
 import { colors, radii, shadow, typography, fontFamily } from '@gvr-mart/theme';
 import { api, ApiError } from '../../api/client';
@@ -103,7 +104,7 @@ export function AdminProductsScreen() {
               <Image source={{ uri: form.imageUrl }} style={styles.photoPreview} />
             ) : (
               <View style={styles.photoPlaceholder}>
-                <Text style={styles.photoPlaceholderIcon}>📷</Text>
+                <Ionicons name="camera-outline" size={26} color={colors.blueDeep} />
                 <Text style={styles.photoPlaceholderText}>Add your own photo</Text>
               </View>
             )}
@@ -175,7 +176,6 @@ const styles = StyleSheet.create({
   photoPicker: { marginBottom: 6 },
   photoPreview: { width: 96, height: 96, borderRadius: radii.sm, backgroundColor: colors.blueSoft },
   photoPlaceholder: { width: 96, height: 96, borderRadius: radii.sm, backgroundColor: colors.cream, borderWidth: 1.5, borderColor: colors.border, borderStyle: 'dashed', alignItems: 'center', justifyContent: 'center', gap: 4 },
-  photoPlaceholderIcon: { fontSize: 22 },
   photoPlaceholderText: { fontFamily: fontFamily.bodyMedium, fontSize: 9.5, color: colors.inkSoft, textAlign: 'center', paddingHorizontal: 6 },
   photoHint: { fontFamily: fontFamily.body, fontSize: 10.5, color: colors.inkSoft, marginBottom: 14 },
   catRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginBottom: 12 },

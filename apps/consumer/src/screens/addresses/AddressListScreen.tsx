@@ -22,7 +22,7 @@ export function AddressListScreen({ navigation }: any) {
       <Text style={[typography.h1, { marginBottom: 18 }]}>Saved Addresses</Text>
 
       {addresses.length === 0 ? (
-        <EmptyState icon="📍" message="No addresses saved yet." />
+        <EmptyState icon="location-outline" message="No addresses saved yet." />
       ) : (
         addresses.map((addr) => (
           <View key={addr.id} style={styles.card}>

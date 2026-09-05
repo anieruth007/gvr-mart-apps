@@ -33,7 +33,7 @@ export function AdminCustomersScreen() {
       <Text style={[typography.h1, { marginBottom: 18 }]}>Customers</Text>
 
       {customers.length === 0 ? (
-        <EmptyState icon="👥" message="No customers yet." />
+        <EmptyState icon="people-outline" message="No customers yet." />
       ) : (
         customers.map((c) => (
           <View key={c.id} style={styles.card}>

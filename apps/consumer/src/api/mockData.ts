@@ -12,11 +12,11 @@ const nowIso = () => new Date().toISOString();
 // ---------- Static catalogue (mirrors the real seed data) ----------
 
 const categories = [
-  { id: 'cat-fruits', name: 'Fruits', emoji: '🍎', imageUrl: null },
-  { id: 'cat-veg', name: 'Vegetables', emoji: '🥦', imageUrl: null },
-  { id: 'cat-leafy', name: 'Leafy Greens', emoji: '🥬', imageUrl: null },
-  { id: 'cat-exotic', name: 'Exotic', emoji: '🥝', imageUrl: null },
-  { id: 'cat-dry', name: 'Dry Fruits', emoji: '🥜', imageUrl: null },
+  { id: 'cat-fruits', name: 'Fruits', imageUrl: null },
+  { id: 'cat-veg', name: 'Vegetables', imageUrl: null },
+  { id: 'cat-leafy', name: 'Leafy Greens', imageUrl: null },
+  { id: 'cat-exotic', name: 'Exotic', imageUrl: null },
+  { id: 'cat-dry', name: 'Dry Fruits', imageUrl: null },
 ];
 
 interface MockVariant {

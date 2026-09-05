@@ -77,7 +77,7 @@ export function AdminDeliveryPartnersScreen() {
       )}
 
       {partners.length === 0 ? (
-        <EmptyState icon="🛵" message="No delivery partners yet." />
+        <EmptyState icon="bicycle-outline" message="No delivery partners yet." />
       ) : (
         partners.map((p) => (
           <View key={p.id} style={styles.card}>

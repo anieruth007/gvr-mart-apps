@@ -86,7 +86,7 @@ export function AdminCouponsScreen() {
       )}
 
       {coupons.length === 0 ? (
-        <EmptyState icon="🏷️" message="No coupons yet." />
+        <EmptyState icon="pricetag-outline" message="No coupons yet." />
       ) : (
         coupons.map((c) => (
           <View key={c.id} style={styles.card}>

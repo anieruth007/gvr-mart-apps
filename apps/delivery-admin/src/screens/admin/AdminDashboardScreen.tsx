@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons';
 import { colors, radii, shadow, typography, fontFamily } from '@gvr-mart/theme';
 import { api } from '../../api/client';
 import { ScreenContainer } from '../../components/ScreenContainer';
@@ -14,14 +15,14 @@ interface Dashboard {
   bulk: Record<string, number>;
 }
 
-const MENU = [
-  { icon: '📦', label: 'Orders', screen: 'AdminOrders' },
-  { icon: '🥬', label: 'Products', screen: 'AdminProducts' },
-  { icon: '📋', label: 'Bulk Enquiries', screen: 'AdminBulkEnquiries' },
-  { icon: '👥', label: 'Customers', screen: 'AdminCustomers' },
-  { icon: '🛵', label: 'Delivery Partners', screen: 'AdminDeliveryPartners' },
-  { icon: '🏷️', label: 'Coupons', screen: 'AdminCoupons' },
-  { icon: '📊', label: 'Reports', screen: 'AdminReports' },
+const MENU: { icon: React.ComponentProps<typeof Ionicons>['name']; label: string; screen: string }[] = [
+  { icon: 'cube-outline', label: 'Orders', screen: 'AdminOrders' },
+  { icon: 'leaf-outline', label: 'Products', screen: 'AdminProducts' },
+  { icon: 'document-text-outline', label: 'Bulk Enquiries', screen: 'AdminBulkEnquiries' },
+  { icon: 'people-outline', label: 'Customers', screen: 'AdminCustomers' },
+  { icon: 'bicycle-outline', label: 'Delivery Partners', screen: 'AdminDeliveryPartners' },
+  { icon: 'pricetag-outline', label: 'Coupons', screen: 'AdminCoupons' },
+  { icon: 'bar-chart-outline', label: 'Reports', screen: 'AdminReports' },
 ];
 
 export function AdminDashboardScreen({ navigation }: any) {
@@ -67,7 +68,9 @@ export function AdminDashboardScreen({ navigation }: any) {
       <View style={styles.menuGrid}>
         {MENU.map((item) => (
           <TouchableOpacity key={item.screen} style={styles.menuTile} onPress={() => navigation.navigate(item.screen)}>
-            <Text style={styles.menuIcon}>{item.icon}</Text>
+            <View style={styles.menuIconWrap}>
+              <Ionicons name={item.icon} size={20} color={colors.blueDeep} />
+            </View>
             <Text style={styles.menuLabel}>{item.label}</Text>
           </TouchableOpacity>
         ))}
@@ -99,6 +102,6 @@ const styles = StyleSheet.create({
   pipelineLabel: { fontFamily: fontFamily.bodyMedium, fontSize: 9.5, color: colors.blueDeep, textTransform: 'capitalize' },
   menuGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 10 },
   menuTile: { width: '31%', backgroundColor: colors.white, borderRadius: radii.md - 2, padding: 14, alignItems: 'center', gap: 6, ...shadow.card },
-  menuIcon: { fontSize: 22 },
+  menuIconWrap: { width: 38, height: 38, borderRadius: 12, backgroundColor: colors.blueSoft, alignItems: 'center', justifyContent: 'center' },
   menuLabel: { fontFamily: fontFamily.bodyBold, fontSize: 10.5, color: colors.ink, textAlign: 'center' },
 });

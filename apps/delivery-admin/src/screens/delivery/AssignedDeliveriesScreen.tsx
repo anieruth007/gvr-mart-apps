@@ -34,7 +34,7 @@ export function AssignedDeliveriesScreen({ navigation }: any) {
       <Text style={[typography.h1, { marginBottom: 18 }]}>Assigned Deliveries</Text>
 
       {deliveries.length === 0 ? (
-        <EmptyState icon="🛵" message="No deliveries assigned right now." />
+        <EmptyState icon="bicycle-outline" message="No deliveries assigned right now." />
       ) : (
         deliveries.map((d) => (
           <TouchableOpacity key={d.id} style={styles.card} onPress={() => navigation.navigate('DeliveryDetail', { delivery: d })}>

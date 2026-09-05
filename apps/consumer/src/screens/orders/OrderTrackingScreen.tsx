@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons';
 import type { OrderDto, OrderStatus } from '@gvr-mart/shared-types';
 import { colors, radii, shadow, typography, fontFamily } from '@gvr-mart/theme';
 import { api } from '../../api/client';
@@ -81,8 +82,9 @@ export function OrderTrackingScreen({ route, navigation }: any) {
 
       {order.status === 'OUT_FOR_DELIVERY' && (
         <View style={styles.otpNote}>
+          <Ionicons name="key-outline" size={14} color={colors.blueDeep} />
           <Text style={styles.otpNoteText}>
-            🔑 Check your notifications for the delivery OTP to share with your delivery partner.
+            Check your notifications for the delivery OTP to share with your delivery partner.
           </Text>
         </View>
       )}
@@ -133,8 +135,8 @@ const styles = StyleSheet.create({
   timelineLabelDone: { color: colors.ink, fontFamily: fontFamily.bodyBold },
   cancelledBox: { backgroundColor: colors.mangoSoft, borderRadius: radii.sm, padding: 14, marginBottom: 20 },
   cancelledText: { fontFamily: fontFamily.body, fontSize: 12.5, color: colors.ink },
-  otpNote: { backgroundColor: colors.blueSoft, borderRadius: radii.sm, padding: 12, marginBottom: 20 },
-  otpNoteText: { fontFamily: fontFamily.bodyMedium, fontSize: 12, color: colors.blueDeep },
+  otpNote: { flexDirection: 'row', alignItems: 'center', gap: 8, backgroundColor: colors.blueSoft, borderRadius: radii.sm, padding: 12, marginBottom: 20 },
+  otpNoteText: { flex: 1, fontFamily: fontFamily.bodyMedium, fontSize: 12, color: colors.blueDeep },
   sectionLabel: { fontSize: 12, fontFamily: fontFamily.bodyExtraBold, color: colors.inkSoft, marginBottom: 10, textTransform: 'uppercase', letterSpacing: 0.6 },
   itemRow: { flexDirection: 'row', alignItems: 'center', paddingVertical: 8, borderBottomWidth: 1, borderBottomColor: colors.border },
   itemName: { flex: 1, fontFamily: fontFamily.body, fontSize: 12.5, color: colors.ink },

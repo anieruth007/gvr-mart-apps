@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons';
 import type { AddressDto, OrderDto } from '@gvr-mart/shared-types';
 import { colors, radii, shadow, typography, fontFamily } from '@gvr-mart/theme';
 import { api, ApiError } from '../../api/client';
@@ -34,7 +35,7 @@ export function CheckoutScreen({ navigation }: any) {
   if (!cart || cart.items.length === 0) {
     return (
       <ScreenContainer>
-        <EmptyState icon="🛒" message="Your cart is empty." />
+        <EmptyState icon="cart-outline" message="Your cart is empty." />
       </ScreenContainer>
     );
   }
@@ -90,7 +91,8 @@ export function CheckoutScreen({ navigation }: any) {
 
       <Text style={styles.sectionLabel}>Delivery slot</Text>
       <View style={styles.slotChip}>
-        <Text style={styles.slotChipText}>⚡ ASAP · within 30 minutes</Text>
+        <Ionicons name="flash-outline" size={13} color={colors.blueDeep} />
+        <Text style={styles.slotChipText}>ASAP · within 30 minutes</Text>
       </View>
       <Text style={styles.slotNote}>Scheduled delivery slots are coming in a future update.</Text>
 
@@ -121,7 +123,8 @@ export function CheckoutScreen({ navigation }: any) {
       </View>
 
       <View style={styles.codNote}>
-        <Text style={styles.codNoteText}>💵 Cash on Delivery — online payment is coming in a future update.</Text>
+        <Ionicons name="cash-outline" size={14} color={colors.ink} />
+        <Text style={styles.codNoteText}>Cash on Delivery — online payment is coming in a future update.</Text>
       </View>
 
       {error && <Text style={styles.error}>{error}</Text>}
@@ -139,7 +142,7 @@ const styles = StyleSheet.create({
   addressLine: { fontFamily: fontFamily.body, fontSize: 12, color: colors.inkSoft },
   addAddressBtn: { backgroundColor: colors.blueSoft, borderRadius: radii.md - 2, padding: 16, alignItems: 'center' },
   addAddressText: { fontFamily: fontFamily.bodyBold, color: colors.blueDeep, fontSize: 13 },
-  slotChip: { backgroundColor: colors.blueSoft, borderRadius: radii.sm, paddingVertical: 10, paddingHorizontal: 14, alignSelf: 'flex-start' },
+  slotChip: { flexDirection: 'row', alignItems: 'center', gap: 6, backgroundColor: colors.blueSoft, borderRadius: radii.sm, paddingVertical: 10, paddingHorizontal: 14, alignSelf: 'flex-start' },
   slotChipText: { fontFamily: fontFamily.bodyBold, fontSize: 12.5, color: colors.blueDeep },
   slotNote: { fontFamily: fontFamily.body, fontSize: 11, color: colors.inkSoft, marginTop: 6 },
   couponInput: { backgroundColor: colors.white, borderRadius: radii.sm, paddingHorizontal: 14, paddingVertical: 12, fontFamily: fontFamily.bodyBold, fontSize: 13, color: colors.ink, ...shadow.card },
@@ -150,7 +153,7 @@ const styles = StyleSheet.create({
   couponNote: { fontFamily: fontFamily.body, fontSize: 10.5, color: colors.faint, marginTop: 2 },
   totalLabel: { fontFamily: fontFamily.bodyBold, fontSize: 15, color: colors.ink },
   totalValue: { fontFamily: fontFamily.bodyExtraBold, fontSize: 15, color: colors.blueDeep },
-  codNote: { marginTop: 14, backgroundColor: colors.mangoSoft, borderRadius: radii.sm, padding: 12 },
-  codNoteText: { fontFamily: fontFamily.body, fontSize: 11.5, color: colors.ink },
+  codNote: { flexDirection: 'row', alignItems: 'center', gap: 8, marginTop: 14, backgroundColor: colors.mangoSoft, borderRadius: radii.sm, padding: 12 },
+  codNoteText: { flex: 1, fontFamily: fontFamily.body, fontSize: 11.5, color: colors.ink },
   error: { color: colors.tomato, fontFamily: fontFamily.bodyMedium, fontSize: 12.5, marginTop: 12 },
 });

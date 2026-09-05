@@ -1,14 +1,15 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { colors, radii, shadow, typography, fontFamily } from '@gvr-mart/theme';
 import { ScreenContainer } from '../../components/ScreenContainer';
 import { useAuth } from '../../context/AuthContext';
 
-const MENU = [
-  { icon: '📦', label: 'My Orders', screen: 'OrderHistory' },
-  { icon: '📋', label: 'My Bulk Enquiries', screen: 'MyEnquiries' },
-  { icon: '📍', label: 'Saved Addresses', screen: 'AddressList' },
-  { icon: '🔔', label: 'Notifications', screen: 'Notifications' },
+const MENU: { icon: React.ComponentProps<typeof Ionicons>['name']; label: string; screen: string }[] = [
+  { icon: 'cube-outline', label: 'My Orders', screen: 'OrderHistory' },
+  { icon: 'document-text-outline', label: 'My Bulk Enquiries', screen: 'MyEnquiries' },
+  { icon: 'location-outline', label: 'Saved Addresses', screen: 'AddressList' },
+  { icon: 'notifications-outline', label: 'Notifications', screen: 'Notifications' },
 ];
 
 export function AccountScreen({ navigation }: any) {
@@ -29,10 +30,10 @@ export function AccountScreen({ navigation }: any) {
       {MENU.map((item) => (
         <TouchableOpacity key={item.screen} style={styles.row} onPress={() => navigation.navigate(item.screen)}>
           <View style={styles.rowIcon}>
-            <Text style={{ fontSize: 17 }}>{item.icon}</Text>
+            <Ionicons name={item.icon} size={18} color={colors.blueDeep} />
           </View>
           <Text style={styles.rowLabel}>{item.label}</Text>
-          <Text style={styles.chevron}>›</Text>
+          <Ionicons name="chevron-forward" size={18} color={colors.faint} />
         </TouchableOpacity>
       ))}
 

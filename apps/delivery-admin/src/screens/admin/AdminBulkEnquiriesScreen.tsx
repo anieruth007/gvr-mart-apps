@@ -30,7 +30,7 @@ export function AdminBulkEnquiriesScreen({ navigation }: any) {
       <Text style={[typography.h1, { marginBottom: 18 }]}>Bulk Enquiries</Text>
 
       {enquiries.length === 0 ? (
-        <EmptyState icon="📋" message="No bulk enquiries yet." />
+        <EmptyState icon="document-text-outline" message="No bulk enquiries yet." />
       ) : (
         enquiries.map((enq) => (
           <TouchableOpacity key={enq.id} style={styles.card} onPress={() => navigation.navigate('AdminQuotationForm', { enquiryId: enq.id })}>
