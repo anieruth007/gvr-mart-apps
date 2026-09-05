@@ -1,6 +1,7 @@
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors, fontFamily } from '@gvr-mart/theme';
 import { HomeScreen } from '../screens/home/HomeScreen';
 import { CategoryListScreen } from '../screens/catalog/CategoryListScreen';
@@ -21,6 +22,10 @@ const ICONS: Record<keyof MainTabParamList, { outline: IconName; filled: IconNam
 
 export function MainTabs() {
   const { cart } = useCart();
+  const insets = useSafeAreaInsets();
+  // Bottom tabs default to a fixed height, which ignores the device's gesture-nav / 3-button
+  // inset and leaves the bar sitting flush against it. Add the inset back in explicitly.
+  const bottomInset = Math.max(insets.bottom, 8);
 
   return (
     <Tab.Navigator
@@ -28,7 +33,7 @@ export function MainTabs() {
         headerShown: false,
         tabBarActiveTintColor: colors.blueDeep,
         tabBarInactiveTintColor: '#ABB2A2',
-        tabBarStyle: { borderTopColor: colors.border, height: 62, paddingTop: 6, paddingBottom: 8 },
+        tabBarStyle: { borderTopColor: colors.border, height: 54 + bottomInset, paddingTop: 6, paddingBottom: bottomInset },
         tabBarLabelStyle: { fontFamily: fontFamily.bodyBold, fontSize: 10.5 },
         tabBarIcon: ({ focused, color }) => {
           const icon = ICONS[route.name as keyof MainTabParamList];

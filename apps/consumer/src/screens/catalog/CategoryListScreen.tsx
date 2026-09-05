@@ -5,8 +5,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import type { CategoryDto, ProductDto } from '@gvr-mart/shared-types';
 import { colors, radii, shadow, fontFamily } from '@gvr-mart/theme';
 import { api } from '../../api/client';
-import { ProductCard } from '../../components/ProductCard';
 import { EmptyState } from '../../components/EmptyState';
+import { Stepper } from '../../components/Stepper';
 import { useCart } from '../../context/CartContext';
 import { ALL_CATEGORY_PHOTO, CATEGORY_PHOTOS } from '../../constants/categoryPhotos';
 
@@ -84,18 +84,18 @@ export function CategoryListScreen({ navigation, route }: any) {
         </ScrollView>
 
         <View style={styles.content}>
-          <View style={styles.sortRow}>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.sortRow} contentContainerStyle={styles.sortRowContent}>
             {(['default', 'price_asc', 'price_desc'] as const).map((mode) => (
               <TouchableOpacity key={mode} onPress={() => setSort(mode)} style={[styles.sortChip, sort === mode && styles.sortChipActive]}>
                 <Text style={[styles.sortChipText, sort === mode && styles.sortChipTextActive]}>
-                  {mode === 'default' ? 'Sort' : mode === 'price_asc' ? 'Price: Low to High' : 'Price: High to Low'}
+                  {mode === 'default' ? 'Sort' : mode === 'price_asc' ? 'Low to High' : 'High to Low'}
                 </Text>
                 {mode === 'default' && <Ionicons name="chevron-down" size={12} color={colors.inkSoft} />}
               </TouchableOpacity>
             ))}
-          </View>
+          </ScrollView>
 
-          <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.gridScroll}>
+          <ScrollView style={styles.gridScrollView} showsVerticalScrollIndicator={false} contentContainerStyle={styles.gridScroll}>
             {sortedProducts.length === 0 ? (
               <EmptyState icon="leaf-outline" message="No products match your search yet." />
             ) : (
@@ -103,10 +103,9 @@ export function CategoryListScreen({ navigation, route }: any) {
                 {sortedProducts.map((product) => {
                   const variantId = product.variants[0]?.id;
                   return (
-                    <ProductCard
+                    <ProductRow
                       key={product.id}
                       product={product}
-                      style={styles.gridCard}
                       quantity={variantId ? quantityFor(variantId) : 0}
                       onPress={() => navigation.navigate('ProductDetail', { productId: product.id })}
                       onIncrement={() => variantId && (quantityFor(variantId) === 0 ? addItem(variantId) : setQuantity(variantId, quantityFor(variantId) + 1))}
@@ -120,6 +119,48 @@ export function CategoryListScreen({ navigation, route }: any) {
         </View>
       </View>
     </SafeAreaView>
+  );
+}
+
+function ProductRow({
+  product,
+  quantity,
+  onPress,
+  onIncrement,
+  onDecrement,
+}: {
+  product: ProductDto;
+  quantity: number;
+  onPress: () => void;
+  onIncrement: () => void;
+  onDecrement: () => void;
+}) {
+  const variant = product.variants[0];
+  if (!variant) return null;
+  const mrp = Number(variant.mrp);
+  const price = Number(variant.sellingPrice);
+  const discountPct = mrp > price ? Math.round((1 - price / mrp) * 100) : 0;
+
+  // The stepper is a sibling of the "open detail" touch target, not nested inside it — see the
+  // note in ProductCard.tsx on why nesting pressables here is fragile across platforms.
+  return (
+    <View style={styles.row}>
+      <TouchableOpacity style={styles.rowPressable} onPress={onPress} activeOpacity={0.85}>
+        <View style={styles.rowImageWrap}>
+          {product.imageUrl ? <Image source={{ uri: product.imageUrl }} style={styles.rowImage} resizeMode="cover" /> : null}
+        </View>
+        <View style={styles.rowBody}>
+          <Text style={styles.rowName} numberOfLines={2}>{product.name}</Text>
+          <Text style={styles.rowUnit}>{variant.label}</Text>
+          <View style={styles.rowPriceRow}>
+            <Text style={styles.rowPrice}>₹{price}</Text>
+            {mrp > price && <Text style={styles.rowMrp}>₹{mrp}</Text>}
+            {discountPct > 0 && <Text style={styles.rowDiscount}>{discountPct}% off</Text>}
+          </View>
+        </View>
+      </TouchableOpacity>
+      <Stepper quantity={quantity} onIncrement={onIncrement} onDecrement={onDecrement} />
+    </View>
   );
 }
 
@@ -163,12 +204,32 @@ const styles = StyleSheet.create({
   sidebarLabel: { fontSize: 10, fontFamily: fontFamily.bodyMedium, color: colors.inkSoft, textAlign: 'center', lineHeight: 12.5 },
   sidebarLabelActive: { color: colors.blueDeep, fontFamily: fontFamily.bodyBold },
   content: { flex: 1 },
-  sortRow: { flexDirection: 'row', gap: 8, padding: 14, paddingBottom: 10 },
+  sortRow: { flexGrow: 0, paddingTop: 14, paddingBottom: 10 },
+  sortRowContent: { flexDirection: 'row', gap: 8, paddingHorizontal: 14 },
   sortChip: { flexDirection: 'row', alignItems: 'center', gap: 4, borderWidth: 1, borderColor: colors.border, borderRadius: 99, paddingHorizontal: 12, paddingVertical: 7 },
   sortChipActive: { backgroundColor: colors.blueSoft, borderColor: colors.blue },
   sortChipText: { fontFamily: fontFamily.bodyMedium, fontSize: 11, color: colors.inkSoft },
   sortChipTextActive: { color: colors.blueDeep, fontFamily: fontFamily.bodyBold },
-  gridScroll: { padding: 14, paddingTop: 4 },
-  grid: { flexDirection: 'row', flexWrap: 'wrap', gap: 12 },
-  gridCard: { width: '48%' },
+  gridScrollView: { flex: 1 },
+  gridScroll: { padding: 14, paddingTop: 4, paddingBottom: 24 },
+  grid: { gap: 10 },
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+    backgroundColor: colors.white,
+    borderRadius: radii.md - 2,
+    padding: 10,
+    ...shadow.card,
+  },
+  rowPressable: { flex: 1, flexDirection: 'row', alignItems: 'center', gap: 12 },
+  rowImageWrap: { width: 68, height: 68, borderRadius: radii.sm, overflow: 'hidden', backgroundColor: colors.blueSoft },
+  rowImage: { width: '100%', height: '100%' },
+  rowBody: { flex: 1 },
+  rowName: { fontSize: 13, fontFamily: fontFamily.bodyBold, color: colors.ink, marginBottom: 3, lineHeight: 17 },
+  rowUnit: { fontSize: 11, color: colors.inkSoft, marginBottom: 5, fontFamily: fontFamily.body },
+  rowPriceRow: { flexDirection: 'row', alignItems: 'baseline', flexWrap: 'wrap', gap: 6 },
+  rowPrice: { fontSize: 14, fontFamily: fontFamily.bodyExtraBold, color: colors.ink },
+  rowMrp: { fontSize: 10.5, color: colors.faint, textDecorationLine: 'line-through', fontFamily: fontFamily.body },
+  rowDiscount: { fontSize: 10.5, fontFamily: fontFamily.bodyBold, color: '#1E9E4E' },
 });

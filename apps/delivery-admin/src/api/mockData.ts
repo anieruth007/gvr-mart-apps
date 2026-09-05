@@ -96,7 +96,7 @@ const products = [
   { id: 'p-strawberry', name: 'Fresh Strawberry', imageUrl: 'https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?w=300&q=70&auto=format', variants: [{ id: 'v1', label: '250g Pack', sellingPrice: '80', stockQty: 52 }] },
   { id: 'p-cauliflower', name: 'Fresh Cauliflower', imageUrl: 'https://images.unsplash.com/photo-1568584711271-6c929fb49b60?w=300&q=70&auto=format', variants: [{ id: 'v2', label: '1 pc, ~600g', sellingPrice: '35', stockQty: 80 }] },
   { id: 'p-lemon', name: 'Yellow Lemon', imageUrl: 'https://images.unsplash.com/photo-1590502593747-42a996133562?w=300&q=70&auto=format', variants: [{ id: 'v3', label: '500g Pack', sellingPrice: '28', stockQty: 99 }, { id: 'v3b', label: '1 kg', sellingPrice: '52', stockQty: 40 }] },
-  { id: 'p-tomato', name: 'Farm Tomato', imageUrl: 'https://images.unsplash.com/photo-1546470427-e26264be0b0d?w=300&q=70&auto=format', variants: [{ id: 'v4', label: '1 kg', sellingPrice: '32', stockQty: 150 }] },
+  { id: 'p-tomato', name: 'Farm Tomato', imageUrl: 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=300&q=70&auto=format', variants: [{ id: 'v4', label: '1 kg', sellingPrice: '32', stockQty: 150 }] },
   { id: 'p-mango', name: 'Alphonso Mango', imageUrl: 'https://images.unsplash.com/photo-1553279768-865429fa0078?w=300&q=70&auto=format', variants: [{ id: 'v-mango-1', label: '1 kg', sellingPrice: '180', stockQty: 5 }] },
   { id: 'p-almonds', name: 'Premium Almonds', imageUrl: 'https://images.unsplash.com/photo-1508061253366-f7da158b6d46?w=300&q=70&auto=format', variants: [{ id: 'v5', label: '250g Pack', sellingPrice: '275', stockQty: 40 }] },
 ];

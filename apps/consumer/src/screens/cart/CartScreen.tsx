@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { colors, radii, shadow, typography, fontFamily } from '@gvr-mart/theme';
 import { ScreenContainer } from '../../components/ScreenContainer';
 import { Stepper } from '../../components/Stepper';
@@ -29,40 +29,42 @@ export function CartScreen({ navigation }: any) {
         <Text style={styles.count}>{cart.itemCount} items</Text>
       </View>
 
-      <View style={styles.list}>
-        {cart.items.map((item) => (
-          <View key={item.id} style={styles.row}>
-            {item.variant.product.imageUrl && (
-              <Image source={{ uri: item.variant.product.imageUrl }} style={styles.image} />
-            )}
-            <View style={{ flex: 1 }}>
-              <Text style={styles.name} numberOfLines={1}>{item.variant.product.name}</Text>
-              <Text style={styles.unit}>{item.variant.label} · ₹{item.variant.sellingPrice}</Text>
+      <ScrollView style={styles.scroll} showsVerticalScrollIndicator={false}>
+        <View style={styles.list}>
+          {cart.items.map((item) => (
+            <View key={item.id} style={styles.row}>
+              {item.variant.product.imageUrl && (
+                <Image source={{ uri: item.variant.product.imageUrl }} style={styles.image} />
+              )}
+              <View style={{ flex: 1 }}>
+                <Text style={styles.name} numberOfLines={1}>{item.variant.product.name}</Text>
+                <Text style={styles.unit}>{item.variant.label} · ₹{item.variant.sellingPrice}</Text>
+              </View>
+              <Stepper
+                quantity={item.quantity}
+                onIncrement={() => setQuantity(item.variantId, item.quantity + 1)}
+                onDecrement={() => setQuantity(item.variantId, item.quantity - 1)}
+              />
             </View>
-            <Stepper
-              quantity={item.quantity}
-              onIncrement={() => setQuantity(item.variantId, item.quantity + 1)}
-              onDecrement={() => setQuantity(item.variantId, item.quantity - 1)}
-            />
-          </View>
-        ))}
-      </View>
+          ))}
+        </View>
 
-      <View style={styles.summary}>
-        <View style={styles.summaryRow}>
-          <Text style={styles.summaryLabel}>Subtotal</Text>
-          <Text style={styles.summaryValue}>₹{cart.subtotal}</Text>
+        <View style={styles.summary}>
+          <View style={styles.summaryRow}>
+            <Text style={styles.summaryLabel}>Subtotal</Text>
+            <Text style={styles.summaryValue}>₹{cart.subtotal}</Text>
+          </View>
+          <View style={styles.summaryRow}>
+            <Text style={styles.summaryLabel}>Delivery fee</Text>
+            <Text style={styles.summaryValue}>{deliveryFee === 0 ? 'FREE' : `₹${deliveryFee}`}</Text>
+          </View>
+          <View style={[styles.summaryRow, { marginTop: 8 }]}>
+            <Text style={styles.totalLabel}>Total</Text>
+            <Text style={styles.totalValue}>₹{total}</Text>
+          </View>
+          <Button label={`Proceed to Checkout · ₹${total}`} onPress={() => navigation.navigate('Checkout')} style={{ marginTop: 16 }} />
         </View>
-        <View style={styles.summaryRow}>
-          <Text style={styles.summaryLabel}>Delivery fee</Text>
-          <Text style={styles.summaryValue}>{deliveryFee === 0 ? 'FREE' : `₹${deliveryFee}`}</Text>
-        </View>
-        <View style={[styles.summaryRow, { marginTop: 8 }]}>
-          <Text style={styles.totalLabel}>Total</Text>
-          <Text style={styles.totalValue}>₹{total}</Text>
-        </View>
-        <Button label={`Proceed to Checkout · ₹${total}`} onPress={() => navigation.navigate('Checkout')} style={{ marginTop: 16 }} />
-      </View>
+      </ScrollView>
     </ScreenContainer>
   );
 }
@@ -70,6 +72,7 @@ export function CartScreen({ navigation }: any) {
 const styles = StyleSheet.create({
   header: { padding: 18, paddingBottom: 10, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'baseline' },
   count: { fontFamily: fontFamily.bodyMedium, fontSize: 12.5, color: colors.inkSoft },
+  scroll: { flex: 1 },
   list: { paddingHorizontal: 18 },
   row: { flexDirection: 'row', alignItems: 'center', gap: 12, paddingVertical: 12, borderBottomWidth: 1, borderBottomColor: colors.border },
   image: { width: 52, height: 52, borderRadius: 12, backgroundColor: colors.blueSoft },

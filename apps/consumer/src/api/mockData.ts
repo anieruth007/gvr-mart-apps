@@ -102,7 +102,7 @@ const products: MockProduct[] = [
     'p-tomato',
     'Farm Tomato',
     'cat-veg',
-    'https://images.unsplash.com/photo-1546470427-e26264be0b0d?w=400&q=75&auto=format',
+    'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=400&q=75&auto=format',
     [
       ['v-tomato-1', '1 kg', 38, 32, 150],
       ['v-tomato-5', '5 kg', 180, 150, 50],
@@ -182,6 +182,7 @@ interface StoredAddress {
 
 interface StoredOrderItem {
   id: string;
+  variantId: string;
   productNameSnapshot: string;
   variantLabelSnapshot: string;
   unitPriceSnapshot: string;
@@ -228,9 +229,9 @@ const seededDeliveredOrder: StoredOrder = {
   placedAt: new Date(Date.now() - 2 * 24 * 3600 * 1000).toISOString(),
   deliveredAt: new Date(Date.now() - 2 * 24 * 3600 * 1000 + 3600 * 1000).toISOString(),
   items: [
-    { id: uid('oi'), productNameSnapshot: 'Alphonso Mango', variantLabelSnapshot: '1 kg', unitPriceSnapshot: '180', quantity: 1, lineTotal: '180' },
-    { id: uid('oi'), productNameSnapshot: 'Fresh Grapes', variantLabelSnapshot: '500g Pack', unitPriceSnapshot: '60', quantity: 1, lineTotal: '60' },
-    { id: uid('oi'), productNameSnapshot: 'Yellow Lemon', variantLabelSnapshot: '500g Pack', unitPriceSnapshot: '28', quantity: 1, lineTotal: '28' },
+    { id: uid('oi'), variantId: 'v-mango-1', productNameSnapshot: 'Alphonso Mango', variantLabelSnapshot: '1 kg', unitPriceSnapshot: '180', quantity: 1, lineTotal: '180' },
+    { id: uid('oi'), variantId: 'v-grapes-500', productNameSnapshot: 'Fresh Grapes', variantLabelSnapshot: '500g Pack', unitPriceSnapshot: '60', quantity: 1, lineTotal: '60' },
+    { id: uid('oi'), variantId: 'v-lemon-500', productNameSnapshot: 'Yellow Lemon', variantLabelSnapshot: '500g Pack', unitPriceSnapshot: '28', quantity: 1, lineTotal: '28' },
   ],
   address: seededAddress,
   delivery: { id: uid('del'), deliveryPartnerId: 'demo-partner', deliveredAt: new Date(Date.now() - 2 * 24 * 3600 * 1000 + 3600 * 1000).toISOString() },
@@ -440,6 +441,7 @@ export async function mockRequest<T>(method: string, path: string, bodyRaw?: str
       deliveredAt: null,
       items: cart.items.map((i) => ({
         id: uid('oi'),
+        variantId: i.variantId,
         productNameSnapshot: i.variant.product.name,
         variantLabelSnapshot: i.variant.label,
         unitPriceSnapshot: i.variant.sellingPrice,
@@ -482,8 +484,9 @@ export async function mockRequest<T>(method: string, path: string, bodyRaw?: str
     const order = state.orders.find((o) => o.id === reorderMatch[1]);
     if (!order) fail(404, 'Order not found');
     for (const item of order!.items) {
-      const found = products.flatMap((p) => p.variants).find((v) => v.label === item.variantLabelSnapshot);
-      if (found) state.cart[found.id] = (state.cart[found.id] ?? 0) + item.quantity;
+      if (findVariant(item.variantId)) {
+        state.cart[item.variantId] = (state.cart[item.variantId] ?? 0) + item.quantity;
+      }
     }
     return ok(computeCart()) as T;
   }
@@ -532,7 +535,7 @@ export async function mockRequest<T>(method: string, path: string, bodyRaw?: str
       placedAt: nowIso(),
       deliveredAt: null,
       items: [
-        { id: uid('oi'), productNameSnapshot: 'Alphonso Mango', variantLabelSnapshot: '1 kg', unitPriceSnapshot: '180', quantity: 30, lineTotal: '5400' },
+        { id: uid('oi'), variantId: 'v-mango-1', productNameSnapshot: 'Alphonso Mango', variantLabelSnapshot: '1 kg', unitPriceSnapshot: '180', quantity: 30, lineTotal: '5400' },
       ],
       address: state.addresses[0],
       delivery: { id: uid('del'), deliveryPartnerId: null, deliveredAt: null },
