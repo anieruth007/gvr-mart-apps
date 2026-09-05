@@ -51,7 +51,7 @@ export function DeliveryDashboardScreen({ navigation }: any) {
           <Text style={styles.onlineLabel}>{isOnline ? "You're online" : "You're offline"}</Text>
           <Text style={styles.onlineHint}>{isOnline ? 'Ready to receive deliveries' : 'Go online to start receiving orders'}</Text>
         </View>
-        <Switch value={isOnline} onValueChange={toggleOnline} trackColor={{ true: colors.green, false: colors.border }} />
+        <Switch value={isOnline} onValueChange={toggleOnline} trackColor={{ true: colors.blue, false: colors.border }} />
       </View>
 
       <TouchableOpacity style={styles.assignedCard} onPress={() => navigation.navigate('AssignedDeliveries')}>
@@ -88,7 +88,7 @@ function EarningTile({ label, value }: { label: string; value: number }) {
 const styles = StyleSheet.create({
   headerRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 20 },
   logout: { fontFamily: fontFamily.bodyBold, fontSize: 12.5, color: colors.tomato },
-  onlineCard: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', backgroundColor: colors.greenDeep, borderRadius: radii.lg, padding: 18, marginBottom: 16 },
+  onlineCard: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', backgroundColor: colors.blueDeep, borderRadius: radii.lg, padding: 18, marginBottom: 16 },
   onlineLabel: { color: colors.white, fontFamily: fontFamily.headingSemibold, fontSize: 16, marginBottom: 4 },
   onlineHint: { color: 'rgba(255,255,255,0.7)', fontFamily: fontFamily.body, fontSize: 11.5, maxWidth: 200 },
   assignedCard: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', backgroundColor: colors.white, borderRadius: radii.md, padding: 16, marginBottom: 20, ...shadow.card },
@@ -98,8 +98,8 @@ const styles = StyleSheet.create({
   sectionLabel: { fontSize: 12, fontFamily: fontFamily.bodyExtraBold, color: colors.inkSoft, marginBottom: 10, textTransform: 'uppercase', letterSpacing: 0.6 },
   earningsGrid: { flexDirection: 'row', gap: 10 },
   earningTile: { flex: 1, backgroundColor: colors.white, borderRadius: radii.md - 2, padding: 14, alignItems: 'center', ...shadow.card },
-  earningValue: { fontFamily: fontFamily.bodyExtraBold, fontSize: 17, color: colors.greenDeep, marginBottom: 4 },
+  earningValue: { fontFamily: fontFamily.bodyExtraBold, fontSize: 17, color: colors.blueDeep, marginBottom: 4 },
   earningLabel: { fontFamily: fontFamily.body, fontSize: 10.5, color: colors.inkSoft },
   historyLink: { marginTop: 18, alignItems: 'center', padding: 12 },
-  historyLinkText: { fontFamily: fontFamily.bodyBold, fontSize: 12.5, color: colors.greenDeep },
+  historyLinkText: { fontFamily: fontFamily.bodyBold, fontSize: 12.5, color: colors.blueDeep },
 });

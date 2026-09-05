@@ -25,7 +25,7 @@ export function MainTabs() {
     <Tab.Navigator
       screenOptions={({ route }) => ({
         headerShown: false,
-        tabBarActiveTintColor: colors.greenDeep,
+        tabBarActiveTintColor: colors.blueDeep,
         tabBarInactiveTintColor: '#ABB2A2',
         tabBarStyle: { borderTopColor: colors.border, height: 62, paddingTop: 6, paddingBottom: 8 },
         tabBarLabelStyle: { fontFamily: fontFamily.bodyBold, fontSize: 10.5 },

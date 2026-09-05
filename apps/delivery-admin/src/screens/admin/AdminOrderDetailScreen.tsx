@@ -149,10 +149,10 @@ const styles = StyleSheet.create({
   itemPrice: { fontFamily: fontFamily.bodyBold, fontSize: 12.5, color: colors.ink },
   divider: { height: 1, backgroundColor: colors.border, marginVertical: 6 },
   totalLabel: { fontFamily: fontFamily.bodyBold, fontSize: 14, color: colors.ink },
-  totalValue: { fontFamily: fontFamily.bodyExtraBold, fontSize: 14, color: colors.greenDeep },
+  totalValue: { fontFamily: fontFamily.bodyExtraBold, fontSize: 14, color: colors.blueDeep },
   error: { color: colors.tomato, fontFamily: fontFamily.bodyMedium, fontSize: 12.5, marginBottom: 12 },
   partnerRow: { flexDirection: 'row', justifyContent: 'space-between', padding: 12, borderRadius: radii.sm, borderWidth: 1.5, borderColor: colors.border, marginBottom: 8 },
-  partnerRowActive: { borderColor: colors.green, backgroundColor: colors.greenSoft },
+  partnerRowActive: { borderColor: colors.blue, backgroundColor: colors.blueSoft },
   partnerName: { fontFamily: fontFamily.bodyBold, fontSize: 12.5, color: colors.ink },
   partnerStatus: { fontFamily: fontFamily.bodyMedium, fontSize: 11, color: colors.inkSoft },
 });

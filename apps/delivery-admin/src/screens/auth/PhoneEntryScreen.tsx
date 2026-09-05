@@ -63,10 +63,10 @@ export function PhoneEntryScreen({ navigation }: any) {
 
 const styles = StyleSheet.create({
   logoRow: { flexDirection: 'row', alignItems: 'center', gap: 10, marginTop: 40, marginBottom: 20 },
-  logoMark: { width: 44, height: 44, borderRadius: 13, backgroundColor: colors.greenDeep, alignItems: 'center', justifyContent: 'center' },
+  logoMark: { width: 44, height: 44, borderRadius: 13, backgroundColor: colors.blueDeep, alignItems: 'center', justifyContent: 'center' },
   logoMarkText: { color: colors.white, fontFamily: fontFamily.headingBold, fontSize: 20 },
-  logoText: { fontFamily: fontFamily.headingBold, fontSize: 22, color: colors.greenDeep },
-  badge: { fontFamily: fontFamily.bodyExtraBold, fontSize: 11, letterSpacing: 1, color: colors.green, marginBottom: 6 },
+  logoText: { fontFamily: fontFamily.headingBold, fontSize: 22, color: colors.blueDeep },
+  badge: { fontFamily: fontFamily.bodyExtraBold, fontSize: 11, letterSpacing: 1, color: colors.blue, marginBottom: 6 },
   title: { marginBottom: 8 },
   subtitle: { fontFamily: fontFamily.body, fontSize: 13.5, color: colors.inkSoft, marginBottom: 28, lineHeight: 19 },
   inputRow: { flexDirection: 'row', alignItems: 'center', backgroundColor: colors.white, borderRadius: radii.md - 2, paddingHorizontal: 16, height: 54, ...shadow.card },

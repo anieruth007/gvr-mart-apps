@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View, ViewStyle } from 'react-native';
 import type { ProductDto } from '@gvr-mart/shared-types';
 import { colors, radii, shadow, fontFamily } from '@gvr-mart/theme';
 import { Stepper } from './Stepper';
@@ -10,9 +10,11 @@ interface Props {
   onPress: () => void;
   onIncrement: () => void;
   onDecrement: () => void;
+  /** Overrides the default 2-column-grid width — pass a fixed width for horizontal scrollers. */
+  style?: ViewStyle;
 }
 
-export function ProductCard({ product, quantity, onPress, onIncrement, onDecrement }: Props) {
+export function ProductCard({ product, quantity, onPress, onIncrement, onDecrement, style }: Props) {
   const [liked, setLiked] = useState(false);
   const variant = product.variants[0];
   if (!variant) return null;
@@ -26,7 +28,7 @@ export function ProductCard({ product, quantity, onPress, onIncrement, onDecreme
   // across RN's native responder system vs. react-native-web's DOM-based one, so we avoid it
   // entirely rather than relying on event propagation quirks to keep them independent.
   return (
-    <View style={styles.card}>
+    <View style={[styles.card, style]}>
       {discountPct > 0 && (
         <View style={styles.discountBadge}>
           <Text style={styles.discountText}>{discountPct}% off</Text>
@@ -73,7 +75,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 10,
     left: 10,
-    backgroundColor: colors.greenDeep,
+    backgroundColor: colors.tomato,
     paddingHorizontal: 8,
     paddingVertical: 3,
     borderRadius: 7,
@@ -95,7 +97,7 @@ const styles = StyleSheet.create({
   favIcon: { fontSize: 14, color: '#C9CFC0' },
   favIconActive: { color: colors.tomato },
   imageWrap: {
-    backgroundColor: colors.greenSoft,
+    backgroundColor: colors.blueSoft,
     borderRadius: radii.sm,
     overflow: 'hidden',
     aspectRatio: 1 / 0.85,
@@ -106,6 +108,6 @@ const styles = StyleSheet.create({
   unit: { fontSize: 11, color: colors.inkSoft, marginBottom: 6, fontFamily: fontFamily.body },
   rating: { fontSize: 10.5, color: colors.mango, fontFamily: fontFamily.bodyBold, marginBottom: 8 },
   priceRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
-  now: { fontSize: 14.5, fontFamily: fontFamily.bodyExtraBold, color: colors.greenDeep },
+  now: { fontSize: 14.5, fontFamily: fontFamily.bodyExtraBold, color: colors.blueDeep },
   was: { fontSize: 10.5, color: colors.faint, textDecorationLine: 'line-through', fontFamily: fontFamily.body },
 });

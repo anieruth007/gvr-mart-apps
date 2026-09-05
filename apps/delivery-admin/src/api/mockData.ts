@@ -90,13 +90,15 @@ const coupons = [
   { id: 'coupon-1', code: 'WELCOME100', type: 'FLAT', value: '100', minOrderValue: '300', isActive: true, timesUsed: 0, usageLimit: 1000 },
 ];
 
+const PLACEHOLDER_IMAGE = 'https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=300&q=70&auto=format';
+
 const products = [
-  { id: 'p-strawberry', name: 'Fresh Strawberry', variants: [{ id: 'v1', label: '250g Pack', sellingPrice: '80', stockQty: 52 }] },
-  { id: 'p-cauliflower', name: 'Fresh Cauliflower', variants: [{ id: 'v2', label: '1 pc, ~600g', sellingPrice: '35', stockQty: 80 }] },
-  { id: 'p-lemon', name: 'Yellow Lemon', variants: [{ id: 'v3', label: '500g Pack', sellingPrice: '28', stockQty: 99 }, { id: 'v3b', label: '1 kg', sellingPrice: '52', stockQty: 40 }] },
-  { id: 'p-tomato', name: 'Farm Tomato', variants: [{ id: 'v4', label: '1 kg', sellingPrice: '32', stockQty: 150 }] },
-  { id: 'p-mango', name: 'Alphonso Mango', variants: [{ id: 'v-mango-1', label: '1 kg', sellingPrice: '180', stockQty: 5 }] },
-  { id: 'p-almonds', name: 'Premium Almonds', variants: [{ id: 'v5', label: '250g Pack', sellingPrice: '275', stockQty: 40 }] },
+  { id: 'p-strawberry', name: 'Fresh Strawberry', imageUrl: 'https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?w=300&q=70&auto=format', variants: [{ id: 'v1', label: '250g Pack', sellingPrice: '80', stockQty: 52 }] },
+  { id: 'p-cauliflower', name: 'Fresh Cauliflower', imageUrl: 'https://images.unsplash.com/photo-1568584711271-6c929fb49b60?w=300&q=70&auto=format', variants: [{ id: 'v2', label: '1 pc, ~600g', sellingPrice: '35', stockQty: 80 }] },
+  { id: 'p-lemon', name: 'Yellow Lemon', imageUrl: 'https://images.unsplash.com/photo-1590502593747-42a996133562?w=300&q=70&auto=format', variants: [{ id: 'v3', label: '500g Pack', sellingPrice: '28', stockQty: 99 }, { id: 'v3b', label: '1 kg', sellingPrice: '52', stockQty: 40 }] },
+  { id: 'p-tomato', name: 'Farm Tomato', imageUrl: 'https://images.unsplash.com/photo-1546470427-e26264be0b0d?w=300&q=70&auto=format', variants: [{ id: 'v4', label: '1 kg', sellingPrice: '32', stockQty: 150 }] },
+  { id: 'p-mango', name: 'Alphonso Mango', imageUrl: 'https://images.unsplash.com/photo-1553279768-865429fa0078?w=300&q=70&auto=format', variants: [{ id: 'v-mango-1', label: '1 kg', sellingPrice: '180', stockQty: 5 }] },
+  { id: 'p-almonds', name: 'Premium Almonds', imageUrl: 'https://images.unsplash.com/photo-1508061253366-f7da158b6d46?w=300&q=70&auto=format', variants: [{ id: 'v5', label: '250g Pack', sellingPrice: '275', stockQty: 40 }] },
 ];
 
 const categories = [
@@ -312,7 +314,12 @@ export async function mockRequest<T>(method: string, path: string, bodyRaw?: str
     return ok(categories) as T;
   }
   if (method === 'POST' && path === '/products') {
-    products.push({ id: uid('prod'), name: body.name, variants: (body.variants ?? []).map((v: any) => ({ id: uid('var'), label: v.label, sellingPrice: String(v.sellingPrice), stockQty: v.stockQty ?? 0 })) });
+    products.push({
+      id: uid('prod'),
+      name: body.name,
+      imageUrl: body.imageUrl || PLACEHOLDER_IMAGE,
+      variants: (body.variants ?? []).map((v: any) => ({ id: uid('var'), label: v.label, sellingPrice: String(v.sellingPrice), stockQty: v.stockQty ?? 0 })),
+    });
     return ok({ success: true }) as T;
   }
 

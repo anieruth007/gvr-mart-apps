@@ -34,6 +34,6 @@ const styles = StyleSheet.create({
   action: {
     fontFamily: 'Manrope_700Bold',
     fontSize: 12.5,
-    color: colors.greenDeep,
+    color: colors.blueDeep,
   },
 });

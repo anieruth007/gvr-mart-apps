@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
   header: { padding: 18, paddingBottom: 4 },
   filterRow: { flexGrow: 0, marginBottom: 14 },
   filterChip: { borderWidth: 1, borderColor: colors.border, borderRadius: 99, paddingHorizontal: 14, paddingVertical: 8 },
-  filterChipActive: { backgroundColor: colors.greenDeep, borderColor: colors.greenDeep },
+  filterChipActive: { backgroundColor: colors.blueDeep, borderColor: colors.blueDeep },
   filterText: { fontFamily: fontFamily.bodyBold, fontSize: 11.5, color: colors.inkSoft },
   filterTextActive: { color: colors.white },
   body: { paddingHorizontal: 18 },

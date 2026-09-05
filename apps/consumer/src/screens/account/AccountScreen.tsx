@@ -47,11 +47,11 @@ export function AccountScreen({ navigation }: any) {
 
 const styles = StyleSheet.create({
   profile: { flexDirection: 'row', alignItems: 'center', gap: 14, marginBottom: 24 },
-  avatar: { width: 56, height: 56, borderRadius: 28, backgroundColor: colors.greenDeep, alignItems: 'center', justifyContent: 'center' },
+  avatar: { width: 56, height: 56, borderRadius: 28, backgroundColor: colors.blueDeep, alignItems: 'center', justifyContent: 'center' },
   avatarText: { color: colors.white, fontFamily: fontFamily.headingBold, fontSize: 22 },
   phone: { fontFamily: fontFamily.body, fontSize: 12.5, color: colors.inkSoft, marginTop: 2 },
   row: { flexDirection: 'row', alignItems: 'center', gap: 14, backgroundColor: colors.white, borderRadius: radii.md - 2, padding: 14, marginBottom: 10, ...shadow.card },
-  rowIcon: { width: 38, height: 38, borderRadius: 12, backgroundColor: colors.greenSoft, alignItems: 'center', justifyContent: 'center' },
+  rowIcon: { width: 38, height: 38, borderRadius: 12, backgroundColor: colors.blueSoft, alignItems: 'center', justifyContent: 'center' },
   rowLabel: { flex: 1, fontFamily: fontFamily.bodyBold, fontSize: 13.5, color: colors.ink },
   chevron: { fontSize: 20, color: colors.faint },
   logout: { marginTop: 16, alignItems: 'center', padding: 14 },

@@ -58,6 +58,6 @@ const styles = StyleSheet.create({
   rowTop: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 },
   orderNumber: { fontFamily: fontFamily.bodyBold, fontSize: 13, color: colors.ink },
   meta: { fontFamily: fontFamily.body, fontSize: 12, color: colors.inkSoft },
-  reorderBtn: { alignSelf: 'flex-start', marginTop: 10, backgroundColor: colors.greenSoft, borderRadius: 8, paddingHorizontal: 12, paddingVertical: 6 },
-  reorderText: { fontFamily: fontFamily.bodyBold, fontSize: 11.5, color: colors.greenDeep },
+  reorderBtn: { alignSelf: 'flex-start', marginTop: 10, backgroundColor: colors.blueSoft, borderRadius: 8, paddingHorizontal: 12, paddingVertical: 6 },
+  reorderText: { fontFamily: fontFamily.bodyBold, fontSize: 11.5, color: colors.blueDeep },
 });

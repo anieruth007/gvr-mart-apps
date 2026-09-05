@@ -61,10 +61,10 @@ const styles = StyleSheet.create({
   card: { backgroundColor: colors.white, borderRadius: radii.md - 2, padding: 14, marginBottom: 12, ...shadow.card },
   rowTop: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 6 },
   orderNumber: { fontFamily: fontFamily.bodyBold, fontSize: 13, color: colors.ink },
-  stage: { fontFamily: fontFamily.bodyBold, fontSize: 11.5, color: colors.green },
+  stage: { fontFamily: fontFamily.bodyBold, fontSize: 11.5, color: colors.blue },
   customer: { fontFamily: fontFamily.bodyBold, fontSize: 13, color: colors.ink, marginBottom: 2 },
   address: { fontFamily: fontFamily.body, fontSize: 12, color: colors.inkSoft, marginBottom: 8 },
   rowBottom: { flexDirection: 'row', justifyContent: 'space-between', borderTopWidth: 1, borderTopColor: colors.border, paddingTop: 8 },
   itemCount: { fontFamily: fontFamily.body, fontSize: 11.5, color: colors.inkSoft },
-  amount: { fontFamily: fontFamily.bodyBold, fontSize: 11.5, color: colors.greenDeep },
+  amount: { fontFamily: fontFamily.bodyBold, fontSize: 11.5, color: colors.blueDeep },
 });

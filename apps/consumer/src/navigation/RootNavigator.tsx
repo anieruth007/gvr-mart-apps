@@ -31,7 +31,7 @@ const navTheme = {
 const screenHeaderOptions = {
   headerStyle: { backgroundColor: colors.cream },
   headerShadowVisible: false,
-  headerTintColor: colors.greenDeep,
+  headerTintColor: colors.blueDeep,
   headerTitleStyle: { fontFamily: fontFamily.headingSemibold, fontSize: 17 },
 };
 
@@ -70,7 +70,7 @@ export function RootNavigator() {
   if (isLoading) {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.cream }}>
-        <ActivityIndicator color={colors.green} size="large" />
+        <ActivityIndicator color={colors.blue} size="large" />
       </View>
     );
   }

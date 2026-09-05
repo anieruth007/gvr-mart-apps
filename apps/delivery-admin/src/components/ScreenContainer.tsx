@@ -29,7 +29,7 @@ export function ScreenContainer({ children, scroll = true, padded = true, style,
         showsVerticalScrollIndicator={false}
         refreshControl={
           onRefresh ? (
-            <RefreshControl refreshing={!!refreshing} onRefresh={onRefresh} tintColor={colors.green} />
+            <RefreshControl refreshing={!!refreshing} onRefresh={onRefresh} tintColor={colors.blue} />
           ) : undefined
         }
       >

@@ -12,26 +12,26 @@ export const typography: Record<string, TextStyle> = {
     fontFamily: fontFamily.headingBold,
     fontSize: 24,
     lineHeight: 29,
-    color: colors.greenDeep,
+    color: colors.blueDeep,
   },
   h2: {
     fontFamily: fontFamily.headingBold,
     fontSize: 20,
     lineHeight: 25,
-    color: colors.greenDeep,
+    color: colors.blueDeep,
   },
   h3: {
     fontFamily: fontFamily.headingSemibold,
     fontSize: 16,
     lineHeight: 21,
-    color: colors.greenDeep,
+    color: colors.blueDeep,
   },
   eyebrow: {
     fontFamily: fontFamily.bodyExtraBold,
     fontSize: 11,
     letterSpacing: 1.2,
     textTransform: 'uppercase',
-    color: colors.green,
+    color: colors.blue,
   },
   body: {
     fontFamily: fontFamily.body,
@@ -53,7 +53,7 @@ export const typography: Record<string, TextStyle> = {
   price: {
     fontFamily: fontFamily.bodyExtraBold,
     fontSize: 15,
-    color: colors.greenDeep,
+    color: colors.blueDeep,
   },
   priceStrike: {
     fontFamily: fontFamily.body,

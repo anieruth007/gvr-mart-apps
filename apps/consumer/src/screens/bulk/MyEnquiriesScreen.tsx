@@ -61,6 +61,6 @@ const styles = StyleSheet.create({
   card: { backgroundColor: colors.white, borderRadius: radii.md - 2, padding: 14, marginBottom: 12, ...shadow.card },
   rowTop: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 },
   contact: { fontFamily: fontFamily.bodyBold, fontSize: 13.5, color: colors.ink },
-  statusText: { fontFamily: fontFamily.bodyBold, fontSize: 11.5, color: colors.green },
+  statusText: { fontFamily: fontFamily.bodyBold, fontSize: 11.5, color: colors.blue },
   meta: { fontFamily: fontFamily.body, fontSize: 12, color: colors.inkSoft },
 });

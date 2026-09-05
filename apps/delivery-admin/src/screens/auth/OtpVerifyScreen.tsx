@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   subtitle: { fontFamily: fontFamily.body, fontSize: 13.5, color: colors.inkSoft, marginBottom: 24 },
   devHint: { backgroundColor: colors.mangoSoft, borderRadius: radii.sm, padding: 12, marginBottom: 20 },
   devHintText: { fontFamily: fontFamily.body, fontSize: 12.5, color: colors.ink, lineHeight: 18 },
-  devHintCode: { fontFamily: fontFamily.bodyExtraBold, color: colors.greenDeep, fontSize: 14 },
+  devHintCode: { fontFamily: fontFamily.bodyExtraBold, color: colors.blueDeep, fontSize: 14 },
   otpInput: {
     backgroundColor: colors.white,
     borderRadius: radii.md - 2,

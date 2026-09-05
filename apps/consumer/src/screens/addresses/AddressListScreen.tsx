@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   card: { backgroundColor: colors.white, borderRadius: radii.md - 2, padding: 14, marginBottom: 12, ...shadow.card },
   rowTop: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 },
   label: { fontFamily: fontFamily.bodyBold, fontSize: 13.5, color: colors.ink },
-  defaultPill: { backgroundColor: colors.greenSoft, borderRadius: 99, paddingHorizontal: 8, paddingVertical: 2 },
-  defaultPillText: { fontFamily: fontFamily.bodyBold, fontSize: 10, color: colors.greenDeep },
+  defaultPill: { backgroundColor: colors.blueSoft, borderRadius: 99, paddingHorizontal: 8, paddingVertical: 2 },
+  defaultPillText: { fontFamily: fontFamily.bodyBold, fontSize: 10, color: colors.blueDeep },
   line: { fontFamily: fontFamily.body, fontSize: 12, color: colors.inkSoft },
 });

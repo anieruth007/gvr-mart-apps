@@ -87,7 +87,7 @@ export function AdminDeliveryPartnersScreen() {
                 {p.phone} · {p._count.deliveriesDone} deliveries · {p.deliveryPartnerProfile?.isOnline ? 'Online' : 'Offline'}
               </Text>
             </View>
-            <Switch value={p.isActive} onValueChange={(v) => toggleActive(p.id, v)} trackColor={{ true: colors.green, false: colors.border }} />
+            <Switch value={p.isActive} onValueChange={(v) => toggleActive(p.id, v)} trackColor={{ true: colors.blue, false: colors.border }} />
           </View>
         ))
       )}
@@ -106,7 +106,7 @@ function Field({ label, ...props }: any) {
 
 const styles = StyleSheet.create({
   headerRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 18 },
-  toggle: { fontFamily: fontFamily.bodyBold, fontSize: 12.5, color: colors.greenDeep },
+  toggle: { fontFamily: fontFamily.bodyBold, fontSize: 12.5, color: colors.blueDeep },
   form: { backgroundColor: colors.white, borderRadius: radii.md, padding: 16, marginBottom: 20, ...shadow.card },
   fieldLabel: { fontFamily: fontFamily.bodyBold, fontSize: 10.5, color: colors.inkSoft, marginBottom: 6, textTransform: 'uppercase', letterSpacing: 0.4 },
   input: { backgroundColor: colors.cream, borderRadius: radii.sm, paddingHorizontal: 12, paddingVertical: 10, fontFamily: fontFamily.body, fontSize: 13, color: colors.ink, borderWidth: 1, borderColor: colors.border },

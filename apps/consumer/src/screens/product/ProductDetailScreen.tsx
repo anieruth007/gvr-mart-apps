@@ -91,15 +91,15 @@ export function ProductDetailScreen({ route, navigation }: any) {
 }
 
 const styles = StyleSheet.create({
-  imageWrap: { height: 260, backgroundColor: colors.greenSoft },
+  imageWrap: { height: 260, backgroundColor: colors.blueSoft },
   image: { width: '100%', height: '100%' },
   body: { padding: 20, gap: 4 },
   rating: { fontSize: 12, color: colors.mango, fontFamily: fontFamily.bodyBold, marginBottom: 12 },
   priceRow: { flexDirection: 'row', alignItems: 'center', gap: 10, marginBottom: 18 },
-  price: { fontSize: 24, fontFamily: fontFamily.bodyExtraBold, color: colors.greenDeep },
+  price: { fontSize: 24, fontFamily: fontFamily.bodyExtraBold, color: colors.blueDeep },
   mrp: { fontSize: 14, color: colors.faint, textDecorationLine: 'line-through', fontFamily: fontFamily.body },
-  discountPill: { backgroundColor: colors.greenSoft, paddingHorizontal: 8, paddingVertical: 3, borderRadius: 7 },
-  discountText: { fontSize: 11, color: colors.greenDeep, fontFamily: fontFamily.bodyBold },
+  discountPill: { backgroundColor: colors.blueSoft, paddingHorizontal: 8, paddingVertical: 3, borderRadius: 7 },
+  discountText: { fontSize: 11, color: colors.blueDeep, fontFamily: fontFamily.bodyBold },
   sectionLabel: { fontSize: 12, fontFamily: fontFamily.bodyExtraBold, color: colors.inkSoft, marginTop: 12, marginBottom: 10, textTransform: 'uppercase', letterSpacing: 0.6 },
   variantRow: { flexDirection: 'row' },
   variantChip: {
@@ -110,11 +110,11 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     marginRight: 10,
   },
-  variantChipActive: { borderColor: colors.green, backgroundColor: colors.greenSoft },
+  variantChipActive: { borderColor: colors.blue, backgroundColor: colors.blueSoft },
   variantLabel: { fontFamily: fontFamily.bodyBold, fontSize: 12.5, color: colors.inkSoft },
-  variantLabelActive: { color: colors.greenDeep },
+  variantLabelActive: { color: colors.blueDeep },
   description: { fontFamily: fontFamily.body, fontSize: 13.5, color: colors.inkSoft, lineHeight: 20 },
-  stockNote: { fontFamily: fontFamily.bodyMedium, fontSize: 12, color: colors.green, marginTop: 16 },
+  stockNote: { fontFamily: fontFamily.bodyMedium, fontSize: 12, color: colors.blue, marginTop: 16 },
   footer: {
     flexDirection: 'row',
     gap: 12,

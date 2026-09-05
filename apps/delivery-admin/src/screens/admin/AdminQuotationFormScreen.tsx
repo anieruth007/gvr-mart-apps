@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
   row: { flexDirection: 'row', gap: 10 },
   fieldLabel: { fontFamily: fontFamily.bodyBold, fontSize: 10.5, color: colors.inkSoft, marginBottom: 6, textTransform: 'uppercase', letterSpacing: 0.4 },
   input: { backgroundColor: colors.cream, borderRadius: radii.sm, paddingHorizontal: 12, paddingVertical: 10, fontFamily: fontFamily.bodyBold, fontSize: 13, color: colors.ink, borderWidth: 1, borderColor: colors.border },
-  totalCard: { flexDirection: 'row', justifyContent: 'space-between', backgroundColor: colors.greenDeep, borderRadius: radii.md, padding: 16, marginTop: 8, marginBottom: 16 },
+  totalCard: { flexDirection: 'row', justifyContent: 'space-between', backgroundColor: colors.blueDeep, borderRadius: radii.md, padding: 16, marginTop: 8, marginBottom: 16 },
   totalLabel: { fontFamily: fontFamily.bodyBold, fontSize: 13.5, color: colors.white },
   totalValue: { fontFamily: fontFamily.headingBold, fontSize: 18, color: colors.mango },
   error: { color: colors.tomato, fontFamily: fontFamily.bodyMedium, fontSize: 12.5, marginBottom: 12 },

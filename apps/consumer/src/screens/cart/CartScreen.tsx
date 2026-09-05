@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
   count: { fontFamily: fontFamily.bodyMedium, fontSize: 12.5, color: colors.inkSoft },
   list: { paddingHorizontal: 18 },
   row: { flexDirection: 'row', alignItems: 'center', gap: 12, paddingVertical: 12, borderBottomWidth: 1, borderBottomColor: colors.border },
-  image: { width: 52, height: 52, borderRadius: 12, backgroundColor: colors.greenSoft },
+  image: { width: 52, height: 52, borderRadius: 12, backgroundColor: colors.blueSoft },
   name: { fontFamily: fontFamily.bodyBold, fontSize: 13.5, color: colors.ink },
   unit: { fontFamily: fontFamily.body, fontSize: 11.5, color: colors.inkSoft, marginTop: 2 },
   summary: {
@@ -86,5 +86,5 @@ const styles = StyleSheet.create({
   summaryLabel: { fontFamily: fontFamily.body, fontSize: 12.5, color: colors.inkSoft },
   summaryValue: { fontFamily: fontFamily.bodyMedium, fontSize: 12.5, color: colors.ink },
   totalLabel: { fontFamily: fontFamily.bodyBold, fontSize: 15, color: colors.ink },
-  totalValue: { fontFamily: fontFamily.bodyExtraBold, fontSize: 15, color: colors.greenDeep },
+  totalValue: { fontFamily: fontFamily.bodyExtraBold, fontSize: 15, color: colors.blueDeep },
 });

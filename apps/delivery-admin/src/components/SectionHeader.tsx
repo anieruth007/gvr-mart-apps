@@ -26,5 +26,5 @@ export function SectionHeader({ eyebrow, title, action }: Props) {
 
 const styles = StyleSheet.create({
   row: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 14 },
-  action: { fontFamily: fontFamily.bodyBold, fontSize: 12.5, color: colors.greenDeep },
+  action: { fontFamily: fontFamily.bodyBold, fontSize: 12.5, color: colors.blueDeep },
 });

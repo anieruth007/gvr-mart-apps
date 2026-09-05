@@ -15,7 +15,7 @@
     "android": {
       "package": "com.gvrmart.consumer",
       "adaptiveIcon": {
-        "backgroundColor": "#1F4D3A",
+        "backgroundColor": "#123C73",
         "foregroundImage": "./assets/android-icon-foreground.png",
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"

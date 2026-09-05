@@ -5,12 +5,12 @@ import { colors, fontFamily } from '@gvr-mart/theme';
 
 const STATUS_COLOR: Record<OrderStatus, string> = {
   PLACED: colors.mango,
-  CONFIRMED: colors.green,
-  PREPARING: colors.green,
-  PACKED: colors.green,
-  ASSIGNED: colors.greenDeep,
-  OUT_FOR_DELIVERY: colors.greenDeep,
-  DELIVERED: colors.green,
+  CONFIRMED: colors.blue,
+  PREPARING: colors.blue,
+  PACKED: colors.blue,
+  ASSIGNED: colors.blueDeep,
+  OUT_FOR_DELIVERY: colors.blueDeep,
+  DELIVERED: colors.blue,
   CANCELLED: colors.tomato,
   REFUND_PENDING: colors.tomato,
   REFUNDED: colors.inkSoft,

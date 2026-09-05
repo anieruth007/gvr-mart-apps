@@ -35,8 +35,8 @@ const styles = StyleSheet.create({
     borderColor: 'transparent',
     ...shadow.card,
   },
-  iconActive: { borderColor: colors.green, backgroundColor: colors.greenSoft },
+  iconActive: { borderColor: colors.blue, backgroundColor: colors.blueSoft },
   emoji: { fontSize: 28 },
   label: { fontSize: 11.5, fontFamily: fontFamily.bodyBold, color: colors.inkSoft, textAlign: 'center' },
-  labelActive: { color: colors.greenDeep },
+  labelActive: { color: colors.blueDeep },
 });

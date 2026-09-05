@@ -41,7 +41,7 @@ export function AdminCustomersScreen() {
               <Text style={styles.name}>{c.customerProfile?.name ?? c.phone}</Text>
               <Text style={styles.meta}>{c.phone} · {c._count.orders} orders · {c._count.bulkEnquiries} bulk enquiries</Text>
             </View>
-            <Switch value={c.isActive} onValueChange={(v) => toggleActive(c.id, v)} trackColor={{ true: colors.green, false: colors.border }} />
+            <Switch value={c.isActive} onValueChange={(v) => toggleActive(c.id, v)} trackColor={{ true: colors.blue, false: colors.border }} />
           </View>
         ))
       )}

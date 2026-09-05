@@ -60,12 +60,12 @@ export function DeliveryHistoryScreen() {
 }
 
 const styles = StyleSheet.create({
-  summaryCard: { backgroundColor: colors.greenDeep, borderRadius: radii.lg, padding: 20, marginBottom: 22, alignItems: 'center' },
+  summaryCard: { backgroundColor: colors.blueDeep, borderRadius: radii.lg, padding: 20, marginBottom: 22, alignItems: 'center' },
   summaryValue: { color: colors.white, fontFamily: fontFamily.headingBold, fontSize: 30, marginBottom: 6 },
   summaryLabel: { color: 'rgba(255,255,255,0.75)', fontFamily: fontFamily.body, fontSize: 12 },
   sectionLabel: { fontSize: 12, fontFamily: fontFamily.bodyExtraBold, color: colors.inkSoft, marginBottom: 10, textTransform: 'uppercase', letterSpacing: 0.6 },
   row: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', backgroundColor: colors.white, borderRadius: radii.md - 2, padding: 14, marginBottom: 10, ...shadow.card },
   orderNumber: { fontFamily: fontFamily.bodyBold, fontSize: 13, color: colors.ink },
   date: { fontFamily: fontFamily.body, fontSize: 11.5, color: colors.inkSoft, marginTop: 2 },
-  earning: { fontFamily: fontFamily.bodyExtraBold, fontSize: 14, color: colors.green },
+  earning: { fontFamily: fontFamily.bodyExtraBold, fontSize: 14, color: colors.blue },
 });

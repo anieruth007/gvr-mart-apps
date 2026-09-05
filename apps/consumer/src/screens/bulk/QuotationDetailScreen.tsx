@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
   summaryLabel: { fontFamily: fontFamily.body, fontSize: 12.5, color: colors.inkSoft },
   summaryValue: { fontFamily: fontFamily.bodyMedium, fontSize: 12.5, color: colors.ink },
   totalLabel: { fontFamily: fontFamily.bodyBold, fontSize: 15, color: colors.ink },
-  totalValue: { fontFamily: fontFamily.bodyExtraBold, fontSize: 15, color: colors.greenDeep },
+  totalValue: { fontFamily: fontFamily.bodyExtraBold, fontSize: 15, color: colors.blueDeep },
   notes: { fontFamily: fontFamily.body, fontSize: 12, color: colors.inkSoft, marginTop: 14, fontStyle: 'italic' },
   error: { color: colors.tomato, fontFamily: fontFamily.bodyMedium, fontSize: 12.5, marginTop: 12 },
   actions: { flexDirection: 'row', gap: 12, marginTop: 20 },

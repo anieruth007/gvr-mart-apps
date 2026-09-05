@@ -81,10 +81,10 @@ const styles = StyleSheet.create({
   sectionLabel: { fontSize: 12, fontFamily: fontFamily.bodyExtraBold, color: colors.inkSoft, marginTop: 20, marginBottom: 10, textTransform: 'uppercase', letterSpacing: 0.6 },
   grid: { flexDirection: 'row', flexWrap: 'wrap', gap: 10 },
   tile: { width: '47%', backgroundColor: colors.white, borderRadius: radii.md - 2, padding: 14, ...shadow.card },
-  tileValue: { fontFamily: fontFamily.bodyExtraBold, fontSize: 17, color: colors.greenDeep, marginBottom: 4 },
+  tileValue: { fontFamily: fontFamily.bodyExtraBold, fontSize: 17, color: colors.blueDeep, marginBottom: 4 },
   tileLabel: { fontFamily: fontFamily.body, fontSize: 11, color: colors.inkSoft },
   row: { flexDirection: 'row', justifyContent: 'space-between', backgroundColor: colors.white, borderRadius: radii.sm, padding: 12, marginBottom: 8, ...shadow.card },
   rowLabel: { fontFamily: fontFamily.bodyMedium, fontSize: 12.5, color: colors.ink, flex: 1 },
-  rowValue: { fontFamily: fontFamily.bodyBold, fontSize: 12, color: colors.greenDeep },
+  rowValue: { fontFamily: fontFamily.bodyBold, fontSize: 12, color: colors.blueDeep },
   okNote: { fontFamily: fontFamily.body, fontSize: 12.5, color: colors.inkSoft, fontStyle: 'italic' },
 });
