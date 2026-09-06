@@ -3,7 +3,7 @@
     "name": "GVR Mart Partner",
     "slug": "gvr-mart-delivery-admin",
     "scheme": "gvrmartpartner",
-    "version": "1.0.0",
+    "version": "1.4.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -14,6 +14,7 @@
     },
     "android": {
       "package": "com.gvrmart.deliveryadmin",
+      "versionCode": 4,
       "adaptiveIcon": {
         "backgroundColor": "#123C73",
         "foregroundImage": "./assets/android-icon-foreground.png",
