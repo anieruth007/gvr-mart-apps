@@ -88,6 +88,7 @@ export function HomeScreen({ navigation }: any) {
 
       <View style={styles.body}>
         <BannerCarousel
+          height={310}
           slides={[
             <LinearGradient key="brand" colors={gradients.hero} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={styles.hero}>
               <View style={styles.heroTag}>
@@ -97,7 +98,7 @@ export function HomeScreen({ navigation }: any) {
                 Real freshness,{'\n'}
                 <Text style={{ color: colors.mango, fontFamily: fontFamily.headingBold }}>zero</Text> middlemen.
               </Text>
-              <Text style={styles.heroSubtitle}>Vegetables & fruits sourced straight from Tamil Nadu farms to your kitchen.</Text>
+              <Text style={styles.heroSubtitle} numberOfLines={2}>Vegetables & fruits sourced straight from Tamil Nadu farms to your kitchen.</Text>
               <TouchableOpacity style={styles.heroCta} onPress={() => navigation.navigate('Categories')}>
                 <Text style={styles.heroCtaText}>Start Shopping →</Text>
               </TouchableOpacity>

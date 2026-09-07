@@ -21,6 +21,50 @@ function check(condition, message) {
   console.log(condition ? `  ok  - ${message}` : `  FAIL - ${message}`);
 }
 
+// A fixed-height card whose content is actually taller than that height renders fine on web
+// (CSS overflow defaults to visible, so the excess just spills below the card) but gets
+// silently clipped on native Android (ScrollView clips both axes by default there) — the exact
+// bug that got the hero banner's CTA button cut off on a real device while looking fine here.
+// Compare declared height vs actual content extent so this class of bug is still catchable
+// from a web-only test.
+async function assertContentFitsDeclaredHeight(page, { markerText, declaredHeight, tolerance = 4 }) {
+  const overflow = await page.evaluate(({ markerText, declaredHeight }) => {
+    const all = Array.from(document.querySelectorAll('div'));
+    for (const d of all) {
+      if (d.children.length === 0 && d.textContent === markerText) {
+        // Walk up to the nearest ancestor whose own rendered height matches the declared
+        // fixed height of the slide wrapper (BannerCarousel sets this via inline style).
+        let anc = d.parentElement;
+        for (let i = 0; i < 8 && anc; i++) {
+          const r = anc.getBoundingClientRect();
+          if (Math.abs(r.height - declaredHeight) < 2) {
+            // Found the slide wrapper. Now find the deepest-last content element inside it
+            // and see how far past the wrapper's own bottom edge it extends.
+            const inner = Array.from(anc.querySelectorAll('*'));
+            let maxBottom = r.top;
+            for (const el of inner) {
+              const ir = el.getBoundingClientRect();
+              if (ir.width > 0 && ir.height > 0) maxBottom = Math.max(maxBottom, ir.bottom);
+            }
+            return { wrapperBottom: r.bottom, contentBottom: maxBottom, overflowPx: maxBottom - r.bottom };
+          }
+          anc = anc.parentElement;
+        }
+        return { notFound: 'wrapper' };
+      }
+    }
+    return { notFound: 'marker' };
+  }, { markerText, declaredHeight });
+
+  if (overflow.notFound) {
+    failures.push(`could not measure slide containing "${markerText}" (${overflow.notFound} not found)`);
+    console.log(`  FAIL - could not measure slide containing "${markerText}"`);
+    return;
+  }
+  const healthy = overflow.overflowPx <= tolerance;
+  check(healthy, `slide content fits its declared height (content overflows by ${Math.round(overflow.overflowPx)}px — this is invisible on web but gets clipped on native Android)`);
+}
+
 // The exact bug this guards against: a flex container collapsing to ~0 width makes text wrap
 // to one character per line. A healthy short label never renders taller than ~2 lines, so a
 // element that's short in width and mp taller than expected — is nearly always this collapse.
@@ -79,6 +123,7 @@ async function main() {
     await page.waitForTimeout(5000);
     await page.screenshot({ path: path.join(OUT_DIR, '1-home.png') });
     check(await page.getByText('Daily Offers').count() > 0, 'Home screen reached (Daily Offers visible)');
+    await assertContentFitsDeclaredHeight(page, { markerText: '4.9 · 12k+ orders', declaredHeight: 310 });
 
     console.log('\n[2/5] Categories — All Products list');
     await page.getByRole('tab', { name: 'Categories' }).click();
