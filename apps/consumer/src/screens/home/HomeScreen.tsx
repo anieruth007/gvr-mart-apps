@@ -86,6 +86,21 @@ export function HomeScreen({ navigation }: any) {
         </View>
       </View>
 
+      <View style={styles.brandBar}>
+        <View style={styles.brandRow}>
+          <View style={styles.logoMark}>
+            <Text style={styles.logoMarkText}>G</Text>
+          </View>
+          <Text style={styles.logoText}>
+            GVR <Text style={{ color: colors.mango }}>Mart</Text>
+          </Text>
+        </View>
+        <TouchableOpacity style={styles.searchBar} onPress={() => navigation.navigate('Categories')} activeOpacity={0.8}>
+          <Ionicons name="search-outline" size={16} color={colors.muted} />
+          <Text style={styles.searchPlaceholder}>Search for fresh mangoes, spinach...</Text>
+        </TouchableOpacity>
+      </View>
+
       <View style={styles.body}>
         <BannerCarousel
           height={310}
@@ -123,6 +138,14 @@ export function HomeScreen({ navigation }: any) {
                 <Text style={styles.promoCtaText}>Shop Now →</Text>
               </View>
             </TouchableOpacity>,
+            <TouchableOpacity key="bulk-offer" activeOpacity={0.9} onPress={() => navigation.navigate('BulkOrderForm')} style={styles.bulkSlide}>
+              <Text style={styles.bulkTag}>FOR EVENTS & BUSINESSES</Text>
+              <Text style={styles.bulkSlideTitle}>Need bulk quantities?</Text>
+              <Text style={styles.bulkSlideSubtitle} numberOfLines={2}>Get a custom quotation for functions, hotels & shops</Text>
+              <View style={styles.heroCta}>
+                <Text style={styles.heroCtaText}>Get Quotation →</Text>
+              </View>
+            </TouchableOpacity>,
           ]}
         />
 
@@ -148,17 +171,6 @@ export function HomeScreen({ navigation }: any) {
             </ScrollView>
           </View>
         )}
-
-        <View style={styles.section}>
-          <TouchableOpacity style={styles.bulkBanner} onPress={() => navigation.navigate('BulkOrderForm')} activeOpacity={0.9}>
-            <View style={{ flex: 1 }}>
-              <Text style={styles.bulkTag}>FOR EVENTS & BUSINESSES</Text>
-              <Text style={styles.bulkTitle}>Need bulk quantities?</Text>
-              <Text style={styles.bulkSubtitle}>Get a custom quotation for functions, hotels & shops</Text>
-            </View>
-            <Text style={styles.bulkArrow}>→</Text>
-          </TouchableOpacity>
-        </View>
 
         <View style={styles.section}>
           <SectionHeader eyebrow="Today's picks" title="Featured Products" action={{ label: 'View all', onPress: () => navigation.navigate('Categories') }} />
@@ -201,6 +213,22 @@ const styles = StyleSheet.create({
   utilityItem: { flexDirection: 'row', alignItems: 'center', gap: 5 },
   utilityText: { color: colors.blueSoft, fontSize: 11.5, fontFamily: fontFamily.body },
   utilityBold: { color: colors.mango, fontFamily: fontFamily.bodyBold },
+  brandBar: { backgroundColor: colors.cream, paddingHorizontal: 18, paddingTop: 14, paddingBottom: 4 },
+  brandRow: { flexDirection: 'row', alignItems: 'center', gap: 10, marginBottom: 12 },
+  logoMark: { width: 34, height: 34, borderRadius: 10, backgroundColor: colors.blueDeep, alignItems: 'center', justifyContent: 'center' },
+  logoMarkText: { color: colors.white, fontFamily: fontFamily.headingBold, fontSize: 16 },
+  logoText: { fontFamily: fontFamily.headingBold, fontSize: 19, color: colors.blueDeep },
+  searchBar: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+    backgroundColor: colors.white,
+    borderRadius: 14,
+    paddingHorizontal: 14,
+    paddingVertical: 11,
+    ...shadow.card,
+  },
+  searchPlaceholder: { fontFamily: fontFamily.body, fontSize: 13, color: colors.muted },
   body: { padding: 18, paddingTop: 16 },
   hero: { flex: 1, borderRadius: radii.lg, padding: 22, paddingBottom: 26 },
   heroTag: {
@@ -254,18 +282,10 @@ const styles = StyleSheet.create({
   catRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 12 },
   horizontalScrollArea: { marginHorizontal: -18, paddingHorizontal: 18 },
   compactCard: { width: 148 },
-  bulkBanner: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: colors.blueDeep,
-    borderRadius: radii.lg,
-    padding: 18,
-    gap: 12,
-  },
-  bulkTag: { color: colors.mango, fontFamily: fontFamily.bodyExtraBold, fontSize: 10.5, letterSpacing: 0.6, marginBottom: 6 },
-  bulkTitle: { color: colors.white, fontFamily: fontFamily.headingSemibold, fontSize: 17, marginBottom: 4 },
-  bulkSubtitle: { color: 'rgba(255,255,255,0.7)', fontSize: 11.5, fontFamily: fontFamily.body, maxWidth: 220 },
-  bulkArrow: { color: colors.mango, fontSize: 22, fontFamily: fontFamily.headingBold },
+  bulkSlide: { flex: 1, borderRadius: radii.lg, padding: 22, justifyContent: 'center', backgroundColor: colors.blueDeep },
+  bulkTag: { color: colors.mango, fontFamily: fontFamily.bodyExtraBold, fontSize: 10.5, letterSpacing: 0.6, marginBottom: 10 },
+  bulkSlideTitle: { color: colors.white, fontFamily: fontFamily.headingBold, fontSize: 24, marginBottom: 6 },
+  bulkSlideSubtitle: { color: 'rgba(255,255,255,0.75)', fontSize: 13, fontFamily: fontFamily.body, maxWidth: 240, marginBottom: 16 },
   grid: { flexDirection: 'row', flexWrap: 'wrap', gap: 14 },
   whyStrip: {
     marginTop: 26,
