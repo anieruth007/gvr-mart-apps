@@ -113,14 +113,25 @@ async function main() {
     page.on('pageerror', (err) => consoleErrors.push(err.message));
 
     console.log('\n[1/5] Login flow');
+    // Generous timeouts here specifically: against the live Render backend (vs. the offline
+    // mock) these two requests can hit a free-tier cold start, which takes 30-50s+ to wake up.
     await page.goto(BASE_URL, { waitUntil: 'load', timeout: 60000 });
     await page.waitForTimeout(3000);
     await page.locator('input[placeholder="98765 43210"]').fill('9876543210');
     await page.getByText('Continue', { exact: true }).click();
-    await page.waitForTimeout(2000);
-    await page.locator('input[placeholder="••••••"]').fill('1234');
+    await page.waitForSelector('input[placeholder="••••••"]', { timeout: 90000 });
+    // The offline mock always returns devOtp "1234", but the real backend generates a random
+    // code each time — read whatever is actually shown on screen instead of assuming either.
+    const devOtp = await page.evaluate(() => {
+      const all = Array.from(document.querySelectorAll('*'));
+      const match = all.find((el) => el.children.length === 0 && /^\d{4,6}$/.test(el.textContent || ''));
+      return match?.textContent ?? '1234';
+    });
+    console.log('using devOtp:', devOtp);
+    await page.locator('input[placeholder="••••••"]').fill(devOtp);
     await page.getByText('Verify & Continue', { exact: true }).click();
-    await page.waitForTimeout(5000);
+    await page.waitForSelector('text=Daily Offers', { timeout: 90000 });
+    await page.waitForTimeout(1000);
     await page.screenshot({ path: path.join(OUT_DIR, '1-home.png') });
     check(await page.getByText('Daily Offers').count() > 0, 'Home screen reached (Daily Offers visible)');
     await assertContentFitsDeclaredHeight(page, { markerText: '4.9 · 12k+ orders', declaredHeight: 310 });

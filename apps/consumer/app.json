@@ -3,7 +3,7 @@
     "name": "GVR Mart",
     "slug": "gvr-mart-consumer",
     "scheme": "gvrmart",
-    "version": "1.6.0",
+    "version": "2.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -14,7 +14,7 @@
     },
     "android": {
       "package": "com.gvrmart.consumer",
-      "versionCode": 6,
+      "versionCode": 7,
       "adaptiveIcon": {
         "backgroundColor": "#123C73",
         "foregroundImage": "./assets/android-icon-foreground.png",
