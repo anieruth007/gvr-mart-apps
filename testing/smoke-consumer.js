@@ -118,6 +118,11 @@ async function main() {
     await page.goto(BASE_URL, { waitUntil: 'load', timeout: 60000 });
     await page.waitForTimeout(3000);
     await page.locator('input[placeholder="98765 43210"]').fill('9876543210');
+    // "Continue" stays disabled until the terms/privacy checkbox is ticked.
+    const agreeRow = page.getByText('I agree to the', { exact: false });
+    const agreeBox = await agreeRow.boundingBox();
+    if (agreeBox) await page.mouse.click(agreeBox.x - 15, agreeBox.y + agreeBox.height / 2);
+    else check(false, 'consent checkbox row found on phone entry screen');
     await page.getByText('Continue', { exact: true }).click();
     await page.waitForSelector('input[placeholder="••••••"]', { timeout: 90000 });
     // The offline mock always returns devOtp "1234", but the real backend generates a random
@@ -162,7 +167,19 @@ async function main() {
     await assertTextHealthy(page, 'Sweet Carrot');
 
     console.log('\n[4/5] Product detail + add to cart');
-    await page.getByText('Farm Tomato', { exact: true }).first().click({ force: true });
+    // Bottom tabs keep other screens mounted, so a plain text locator can match a hidden
+    // instance elsewhere (e.g. Home). Click the one that's actually visible on screen.
+    const productClicked = await page.evaluate(() => {
+      const all = Array.from(document.querySelectorAll('div'));
+      for (const d of all) {
+        if (d.children.length === 0 && d.textContent === 'Farm Tomato') {
+          const r = d.getBoundingClientRect();
+          if (r.width > 0 && r.top >= 0 && r.top < window.innerHeight) { d.click(); return true; }
+        }
+      }
+      return false;
+    });
+    check(productClicked, 'visible "Farm Tomato" product found and clicked');
     await page.waitForTimeout(1500);
     await page.screenshot({ path: path.join(OUT_DIR, '4-product-detail.png') });
     check(await page.getByText('Highlights').count() > 0, 'Product detail screen reached');

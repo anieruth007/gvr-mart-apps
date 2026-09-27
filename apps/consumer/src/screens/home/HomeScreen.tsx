@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { Animated, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import type { CategoryDto, ProductDto } from '@gvr-mart/shared-types';
@@ -10,6 +10,7 @@ import { SectionHeader } from '../../components/SectionHeader';
 import { CategoryChip } from '../../components/CategoryChip';
 import { ProductCard } from '../../components/ProductCard';
 import { BannerCarousel } from '../../components/BannerCarousel';
+import { FadeInSection } from '../../components/FadeInSection';
 import { useCart } from '../../context/CartContext';
 import { ALL_CATEGORY_PHOTO, CATEGORY_PHOTOS } from '../../constants/categoryPhotos';
 
@@ -27,6 +28,10 @@ export function HomeScreen({ navigation }: any) {
   const [allProducts, setAllProducts] = useState<ProductDto[]>([]);
   const [refreshing, setRefreshing] = useState(false);
   const { quantityFor, addItem, setQuantity } = useCart();
+  const scrollY = useRef(new Animated.Value(0)).current;
+  const handleScroll = Animated.event([{ nativeEvent: { contentOffset: { y: scrollY } } }], { useNativeDriver: true });
+  const heroScale = scrollY.interpolate({ inputRange: [-120, 0], outputRange: [1.25, 1], extrapolate: 'clamp' });
+  const heroTranslate = scrollY.interpolate({ inputRange: [0, 200], outputRange: [0, -40], extrapolate: 'clamp' });
 
   const load = useCallback(async () => {
     const [cats, products, all] = await Promise.all([
@@ -72,7 +77,7 @@ export function HomeScreen({ navigation }: any) {
   };
 
   return (
-    <ScreenContainer padded={false} refreshing={refreshing} onRefresh={onRefresh}>
+    <ScreenContainer padded={false} refreshing={refreshing} onRefresh={onRefresh} onScroll={handleScroll}>
       <View style={styles.utilityBar}>
         <View style={styles.utilityItem}>
           <Ionicons name="location-outline" size={13} color={colors.blueSoft} />
@@ -102,6 +107,7 @@ export function HomeScreen({ navigation }: any) {
       </View>
 
       <View style={styles.body}>
+        <Animated.View style={{ transform: [{ scale: heroScale }, { translateY: heroTranslate }] }}>
         <BannerCarousel
           height={310}
           slides={[
@@ -148,8 +154,9 @@ export function HomeScreen({ navigation }: any) {
             </TouchableOpacity>,
           ]}
         />
+        </Animated.View>
 
-        <View style={styles.section}>
+        <FadeInSection index={1} style={styles.section}>
           <SectionHeader eyebrow="Shop by" title="Categories" />
           <View style={styles.catRow}>
             {categories.map((c) => (
@@ -161,23 +168,23 @@ export function HomeScreen({ navigation }: any) {
               />
             ))}
           </View>
-        </View>
+        </FadeInSection>
 
         {dailyOffers.length > 0 && (
-          <View style={styles.section}>
+          <FadeInSection index={2} style={styles.section}>
             <SectionHeader eyebrow="Ends tonight" title="Daily Offers" />
             <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.horizontalScrollArea} contentContainerStyle={{ gap: 12 }}>
               {dailyOffers.map((p) => renderProduct(p, styles.compactCard))}
             </ScrollView>
-          </View>
+          </FadeInSection>
         )}
 
-        <View style={styles.section}>
+        <FadeInSection index={3} style={styles.section}>
           <SectionHeader eyebrow="Today's picks" title="Featured Products" action={{ label: 'View all', onPress: () => navigation.navigate('Categories') }} />
           <View style={styles.grid}>{featured.map((p) => renderProduct(p))}</View>
-        </View>
+        </FadeInSection>
 
-        <View style={styles.whyStrip}>
+        <FadeInSection index={4} style={styles.whyStrip}>
           {WHY_US.map((item) => (
             <View key={item.title} style={styles.whyItem}>
               <View style={styles.whyIcon}>
@@ -189,7 +196,7 @@ export function HomeScreen({ navigation }: any) {
               </View>
             </View>
           ))}
-        </View>
+        </FadeInSection>
       </View>
     </ScreenContainer>
   );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { RefreshControl, ScrollView, StyleSheet, View, ViewStyle } from 'react-native';
+import { Animated, RefreshControl, ScrollView, StyleSheet, View, ViewStyle } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { colors } from '@gvr-mart/theme';
 
@@ -10,9 +10,11 @@ interface Props {
   style?: ViewStyle;
   refreshing?: boolean;
   onRefresh?: () => void;
+  /** Pass an Animated.event handler (from Animated.ScrollView) to drive scroll-linked animations. */
+  onScroll?: (...args: any[]) => void;
 }
 
-export function ScreenContainer({ children, scroll = true, padded = true, style, refreshing, onRefresh }: Props) {
+export function ScreenContainer({ children, scroll = true, padded = true, style, refreshing, onRefresh, onScroll }: Props) {
   const inner = padded ? styles.padded : undefined;
   if (!scroll) {
     return (
@@ -23,10 +25,12 @@ export function ScreenContainer({ children, scroll = true, padded = true, style,
   }
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
-      <ScrollView
+      <Animated.ScrollView
         style={styles.flex}
         contentContainerStyle={[inner, style]}
         showsVerticalScrollIndicator={false}
+        onScroll={onScroll}
+        scrollEventThrottle={onScroll ? 16 : undefined}
         refreshControl={
           onRefresh ? (
             <RefreshControl refreshing={!!refreshing} onRefresh={onRefresh} tintColor={colors.blue} />
@@ -34,7 +38,7 @@ export function ScreenContainer({ children, scroll = true, padded = true, style,
         }
       >
         {children}
-      </ScrollView>
+      </Animated.ScrollView>
     </SafeAreaView>
   );
 }

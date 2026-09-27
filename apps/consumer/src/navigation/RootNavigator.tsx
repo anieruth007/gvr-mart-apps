@@ -7,6 +7,7 @@ import { useAuth } from '../context/AuthContext';
 import { CartProvider } from '../context/CartContext';
 import { PhoneEntryScreen } from '../screens/auth/PhoneEntryScreen';
 import { OtpVerifyScreen } from '../screens/auth/OtpVerifyScreen';
+import { PolicyScreen } from '../screens/auth/PolicyScreen';
 import { MainTabs } from './MainTabs';
 import { ProductDetailScreen } from '../screens/product/ProductDetailScreen';
 import { CheckoutScreen } from '../screens/checkout/CheckoutScreen';
@@ -40,6 +41,7 @@ function AuthNavigator() {
     <AuthStack.Navigator screenOptions={{ headerShown: false }}>
       <AuthStack.Screen name="PhoneEntry" component={PhoneEntryScreen} />
       <AuthStack.Screen name="OtpVerify" component={OtpVerifyScreen} />
+      <AuthStack.Screen name="Policy" component={PolicyScreen} />
     </AuthStack.Navigator>
   );
 }
